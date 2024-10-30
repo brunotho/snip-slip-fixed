@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: snip_slip_development
+  username: bruno
+  password:
+  host: /var/run/postgresql
+
+test:
+  <<: *default
+  database: snip_slip_test
+  username: bruno
+  password:
+  host: /var/run/postgresql
+
+production:
+  <<: *default
+  database: snip_slip_production
+  username: snip_slip
+  password: <%= ENV["SNIP_SLIP_DATABASE_PASSWORD"] %>
