@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import GameProgressCard from './GameProgressCard';
 import GameLayout from './GameLayout';
-// import { createGameSessionChannel } from '../channels/game_session_channel';
+import { createGameSessionChannel } from '../channels/game_session_channel';
 
 function GameOver({ gameData, setGameData, players, setPlayers }) {
+  console.log("GameOver props:", { gameData, players });
+  if (!gameData) return null;
+
   useEffect(() => {
     console.log("Setting up GameOver channel with session:", gameData.game_session_id);
-    // const gameChannel = createGameSessionChannel(gameData.game_session_id);
+    const gameChannel = createGameSessionChannel(gameData.game_session_id);
 
-    // gameChannel.received = (data) => {
+    gameChannel.received = (data) => {
       console.log("GameOver received update:", data);
       // console.log("Current gameComplete status:", gameComplete);
       if (data.type === "round_completed") {
@@ -42,7 +45,7 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
 
     return () => {
       console.log("Cleaning up GameOver channel");
-      // gameChannel.unsubscribe();
+      gameChannel.unsubscribe();
     };
   }, [gameData.game_session_id]);
 

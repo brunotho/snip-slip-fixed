@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import HeroSection from './HeroSection';
-// import SnippetsGame from './SnippetsGame';
-// import GameOver from './GameOver';
+import SnippetsGame from './SnippetsGame';
+import GameOver from './GameOver';
 
 function MainComponent({ gameSessionId = null }) {
+  console.log("MainComponent rendering with gameSessionId:", gameSessionId);
+
   const [gameStarted, setGameStarted] = useState(false);
-  const [gameData, setGameData] = useState({});
+  const [gameData, setGameData] = useState(null);
   const [gameMode, setGameMode] = useState(null);
   // const [multiplayerSessionOver, setMultiplayerSessionOver] = useState(false);
-  const [players, setPlayers] = useState({});
+  const [players, setPlayers] = useState([]);
 
 
   const handlePlay = () => {
@@ -70,6 +72,14 @@ function MainComponent({ gameSessionId = null }) {
   //   }
   // };
   const shouldShowGameOver = () => {
+    console.log("Checking game over conditions:", {
+      gameMode,
+      gameData,
+      gameStarted,
+      hasGameData: !!gameData,
+      shouldShow: !gameStarted && gameData
+    });
+
     if (gameMode === "multi") {
       return gameData && gameData.playerGameOver;
     } else {
@@ -77,14 +87,8 @@ function MainComponent({ gameSessionId = null }) {
     }
   };
 
-  console.log("MAIN COMPONENT RETURN:");
-
   return (
     <div>
-      <h1>HHIHIHHIHI</h1>
-      <h1>HHIHIHHIHI</h1>
-      <h1>HHIHIHHIHI</h1>
-      <h1>HHIHweqweqweIHHIHI</h1>
       {!gameStarted && !gameData && !gameSessionId && (
         <>
           <HeroSection onPlay={handlePlay} />
@@ -102,7 +106,7 @@ function MainComponent({ gameSessionId = null }) {
         </>
       )}
 
-      {/* {gameStarted && (
+      {gameStarted && (
         <SnippetsGame
           game_session_id={gameSessionId}
           gameMode={gameMode}
@@ -112,16 +116,16 @@ function MainComponent({ gameSessionId = null }) {
           players={players}
           setPlayers={setPlayers}
         />
-      )} */}
+      )}
 
-      {/* {shouldShowGameOver() && gameData && (
+      {shouldShowGameOver() && gameData && (
         <GameOver
           gameData={gameData}
           setGameData={setGameData}
           players={players}
           setPlayers={setPlayers}
           />
-      )} */}
+      )}
     </div>
   );
 }
