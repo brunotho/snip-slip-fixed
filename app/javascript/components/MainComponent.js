@@ -5,9 +5,11 @@ import GameOver from './GameOver';
 
 function MainComponent({ gameSessionId = null }) {
   console.log("MainComponent rendering with gameSessionId:", gameSessionId);
+  console.log("🤡");
+
 
   const [gameStarted, setGameStarted] = useState(false);
-  const [gameData, setGameData] = useState(null);
+  const [gameData, setGameData] = useState({});
   const [gameMode, setGameMode] = useState(null);
   // const [multiplayerSessionOver, setMultiplayerSessionOver] = useState(false);
   const [players, setPlayers] = useState([]);
@@ -16,7 +18,7 @@ function MainComponent({ gameSessionId = null }) {
   const handlePlay = () => {
     setGameStarted(true);
     setGameData(null);
-    setMultiplayerSessionOver(false);
+    // setMultiplayerSessionOver(false);
     setGameMode("quick");
   };
 
@@ -51,6 +53,7 @@ function MainComponent({ gameSessionId = null }) {
           console.error("Error fetching game sessions details (gameMode):", error);
         });
     }
+
   }, [gameSessionId]);
 
   // const shouldShowGameOver = () => {
@@ -72,24 +75,22 @@ function MainComponent({ gameSessionId = null }) {
   //   }
   // };
   const shouldShowGameOver = () => {
-    console.log("Checking game over conditions:", {
-      gameMode,
-      gameData,
-      gameStarted,
-      hasGameData: !!gameData,
-      shouldShow: !gameStarted && gameData
-    });
-
+    // Only show GameOver if we have actual data
     if (gameMode === "multi") {
-      return gameData && gameData.playerGameOver;
+      return gameData && Object.keys(gameData).length > 0 && gameData.playerGameOver;
     } else {
-      return !gameStarted && gameData;
+      return !gameStarted && Object.keys(gameData).length > 0;
     }
   };
 
+  console.log("🤡🤡🤡🤡");
+  console.log(gameSessionId);
+  console.log(gameData);
+
+
   return (
     <div>
-      {!gameStarted && !gameData && !gameSessionId && (
+      {!gameStarted && Object.keys(gameData).length === 0 && !gameSessionId && (
         <>
           <HeroSection onPlay={handlePlay} />
           <div className="d-flex justify-content-center">
@@ -118,7 +119,7 @@ function MainComponent({ gameSessionId = null }) {
         />
       )}
 
-      {shouldShowGameOver() && gameData && (
+      {shouldShowGameOver() && Object.keys(gameData).length > 0 && (
         <GameOver
           gameData={gameData}
           setGameData={setGameData}

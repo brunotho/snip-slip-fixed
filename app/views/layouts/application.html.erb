@@ -17,8 +17,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
+  <body data-current-user-id="<%= current_user&.id %>">
     <%= render "layouts/header" %>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
     <%= yield %>
   </body>

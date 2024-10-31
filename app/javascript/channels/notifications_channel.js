@@ -6,15 +6,16 @@ consumer.subscriptions.create("NotificationsChannel", {
   },
 
   disconnected() {
-    console.log("Discoonected from notifications channel");
+    console.log("Disconnected from notifications channel");
   },
 
   received(data) {
     console.log("Received notification:", data);
+    console.log("Current user ID:", getCurrentUserId());
+    console.log("Invitation for user ID:", data.player?.id);
     if (data.type === "game_invitation" && data.player.id === getCurrentUserId()) {
       this.showGameInvitation(data)
     }
-
   },
 
   showGameInvitation(data) {
@@ -70,12 +71,28 @@ consumer.subscriptions.create("NotificationsChannel", {
     `
     document.body.appendChild(modal)
     const modalElement = document.getElementById('gameInviteModal')
-    document.getElementById('acceptButton').addEventListener('click', acceptInvitation)
-    const bsModal = new window.bootstrap.Modal(modalElement)
-    bsModal.show()
-  }
 
-})
+    if (typeof bootstrap === 'undefined') {
+      console.error('Bootstrap is not loaded!')
+      return
+    }
+
+    // Wait for next tick to ensure DOM is updated
+    setTimeout(() => {
+      const bsModal = new bootstrap.Modal(modalElement)
+
+      // Add event listener for accept button
+      document.getElementById('acceptButton').addEventListener('click', acceptInvitation)
+
+      // Show modal
+      bsModal.show()
+
+      // Debug logs
+      console.log('Modal element:', modalElement)
+      console.log('Bootstrap Modal instance:', bsModal)
+    }, 0)
+  }
+});
 
 function getCurrentUserId() {
   return parseInt(document.body.dataset.currentUserId)
