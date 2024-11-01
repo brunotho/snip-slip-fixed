@@ -55,3 +55,4 @@ end
 gem 'devise'
 gem 'simple_form'
 gem 'react-rails'
+ruby '3.2.2'
