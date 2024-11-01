@@ -1,7 +1,7 @@
 <div id="add-snippet-form-wrapper">
   <div id="add-snippet-form-content">
     <h3 class="mb-4 mt-4">Add a New Snippet</h3>
-    <%= simple_form_for @lyric_snippet, url: snippets_path do |f| %>
+    <%= simple_form_for @lyric_snippet, url: snippets_path, data: { turbo: false } do |f| %>
       <%= f.input :snippet, as: :text, input_html: { rows: 2 } %>
       <%= f.input :artist %>
       <%= f.input :song %>
