@@ -32,7 +32,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :cloudinary
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -80,4 +80,7 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
   config.action_cable.url = "ws://localhost:3000/cable"
   config.action_cable.allowed_request_origins = [ 'http://localhost:3000', 'http://localhost:3001' ]
+
+  config.assets.debug = true
+  config.assets.digest = false
 end

@@ -1,6 +1,10 @@
 class SnippetsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :fetch_snippets ]
 
+  def test
+    @lyric_snippet = LyricSnippet.first
+  end
+
   def index
     @game_session = current_game_session
   end
@@ -26,7 +30,17 @@ class SnippetsController < ApplicationController
                 .where.not(snippet: "Dummy snippet for failed rounds")
                 .order("RANDOM()")
                 .limit(4)
-    render json: snippets
+
+    p "🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡"
+    LyricSnippet.all.each do |snippet|
+      puts "Snippet #{snippet.id}: image attached? #{snippet.image.attached?}"
+    end
+    p "👻👻👻👻👻👻👻👻👻👻👻👻👻"
+    render json: snippets.map { |snippet|
+      snippet.as_json.merge({
+        image_url: snippet.image.attached? ? snippet.image.url : nil
+      })
+    }
   end
 
   private

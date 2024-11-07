@@ -1,43 +1,73 @@
+@import './variables';
+
+@mixin button-variant($bg-color, $text-color) {
+  color: $text-color;
+  background-color: $bg-color;
+  border-color: $bg-color;
+
+  $hover-bg: darken($bg-color, 10%);
+  $active-bg: darken($bg-color, 15%);
+
+  &:hover {
+    color: $text-color;
+    background-color: $hover-bg;
+    border-color: $hover-bg;
+  }
+
+  &:active {
+    color: $text-color;
+    background-color: $active-bg !important;
+    border-color: $active-bg !important;
+  }
+
+  &:focus,
+  &:focus-visible,
+  &.focus,
+  &:visited {
+    color: $text-color;
+    background-color: $hover-bg !important;
+    border-color: $hover-bg !important;
+  }
+
+  &:focus:active,
+  &:focus-visible:active,
+  &.focus:active {
+    color: $text-color;
+    background-color: $active-bg !important;
+    border-color: $active-bg !important;
+  }
+
+  &:not(:active):not(:focus):not(:hover) {
+    color: $text-color;
+    background-color: $bg-color !important;
+    border-color: $bg-color !important;
+  }
+}
+
+.btn-accent {
+  @include button-variant($color-brand-accent, $color-brand-primary);
+}
+
+.btn-positive {
+  @include button-variant($color-action-positive, $color-brand-primary);
+}
+
+.btn-negative {
+  @include button-variant($color-action-negative, $color-brand-primary);
+}
+
+.btn-submit {
+  @include button-variant($color-action-submit, $bg-white)
+}
+
 .result-button-container {
   display: flex;
   gap: 10px;
 }
 
-// .result-button {
-//   width: 180px;
-//   height: 40px;
-//   border-radius: 40%;
-//   font-size: 24px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   border: none;
-//   cursor: pointer;
-//   transition: transform 0.1s ease-in-out;
-
-//   &:hover {
-//     transform: scale(1.05);
-//   }
-
-//   &:active {
-//     transform: scale(0.95);
-//   }
-
-//   &.success {
-//     background-color: #7dc38d;
-//     color: white;
-//   }
-
-//   &.failure {
-//     background-color: #ab5e66;
-//     color: white;
-//   }
-// }
-
-
 .button-fancy {
-  --b: 3px;   /* border thickness */
-  --s: .45em; /* size of the corner */
+  --b: 3px;
+  --s: .45em;
   --color: #373B44;
 
   padding: calc(.5em + var(--s)) calc(.9em + var(--s));
@@ -57,7 +87,6 @@
   -webkit-user-select: none;
   touch-action: manipulation;
 
-  // height: auto;
   aspect-ratio: 4 / 1;
   margin: 3%;
   margin-left: 6%;
@@ -75,12 +104,18 @@
   color: #fff;
 }
 
-// .button-fancy-success {
-//   @extend .button-fancy;
-//   --color: #1f3923;
-// }
 
-// .button-fancy-fail {
-//   @extend .button-fancy;
-//   --color: #631616;
-// }
+.button-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+
+  form {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    white-space: nowrap;
+  }
+}

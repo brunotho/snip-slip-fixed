@@ -5,7 +5,12 @@ function SnippetCard({ snippet, onClick }) {
     console.error('No snippet data provided to SnippetCard');
     return <div>No snippet data available</div>;
   }
-  
+
+  console.log("👽👽👽👽👽👽👽");
+
+  console.log('Full snippet:', snippet)
+  console.log('Image URL:', snippet.image_url)
+
   return (
     <div
       className="card mb-4"
@@ -31,10 +36,10 @@ function SnippetCard({ snippet, onClick }) {
         </div>
         <div className="col-auto">
           <img
-            src="https://i.scdn.co/image/ab67616d0000b273a6f439c8957170652f9410e2"
+            src={snippet.image_url}
             alt={`${snippet.song} Album Cover`}
             style={{ height: '100%', width: '150px', objectFit: 'cover' }}
-          />
+            />
         </div>
       </div>
     </div>
@@ -42,3 +47,4 @@ function SnippetCard({ snippet, onClick }) {
 }
 
 export default SnippetCard;
+

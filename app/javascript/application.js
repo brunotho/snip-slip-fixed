@@ -8,7 +8,6 @@ import { createRoot } from 'react-dom/client'
 // Import all components
 import MainComponent from "./components/MainComponent"
 import SnippetsGame from "./components/SnippetsGame"
-import DifficultySlider from './components/DifficultySlider'
 import InviteFriend from "./components/InviteFriend"
 import SnippetCard from "./components/SnippetCard"
 import FriendshipManager from "./components/FriendshipManager"

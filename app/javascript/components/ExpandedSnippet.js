@@ -53,7 +53,7 @@ function ExpandedSnippet({ snippet, onSubmit, game_session_id, onNext }) {
         >
           <div style={{ flexShrink: 0 }}>
             <img
-              src="https://i.scdn.co/image/ab67616d0000b273a6f439c8957170652f9410e2"
+              src={snippet.image_url}
               alt={`${snippet.song} Album Cover`}
               style={{
                 maxHeight: '50vh',

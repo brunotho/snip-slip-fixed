@@ -14,15 +14,19 @@ const options = {
   loader: {
     '.js': 'jsx',
     '.scss': 'css'
-  }
+  },
+  logLevel: 'info',
+  metafile: true,   
+  sourcemap: true,
+  target: ['es2015']
 }
 
 if (watchMode) {
-  // Watch mode
+  // Simpler watch mode
   esbuild.context(options).then(context => {
     context.watch()
-  })
+    console.log('Watching for changes...')
+  }).catch(() => process.exit(1))
 } else {
-  // Single build
   esbuild.build(options).catch(() => process.exit(1))
 }

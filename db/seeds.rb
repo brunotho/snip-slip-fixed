@@ -19,16 +19,17 @@ english_snippets = [
   { snippet: "Stop flattering yourself", artist: "Arctic Monkeys", song: "Do Me A Favour", difficulty: 400, language: "English" },
   { snippet: "I forgive you almost all the time", artist: "Lana Del Rey", song: "Roses", difficulty: 450, language: "English" },
   { snippet: "The good are never easy, the easy never good", artist: "Marina", song: "Homewrecker", difficulty: 550, language: "English" },
-  { snippet: "But don't mess up my hair", artist: "Lady Gaga", song: "Vanity", difficulty: 250, language: "English" }
+  { snippet: "But don't mess up my hair", artist: "Lady Gaga", song: "Vanity", difficulty: 250, language: "English" },
+  { snippet: "I can be good, if you just wanna be bad", artist: "Lady Gaga", song: "Government Hooker", difficulty: 600, language: "English" }
 ]
 
 # German lyric snippets (replaced with generic text)
 german_snippets = [
-  { snippet: "deutsch 1", artist: "Rammstein", song: "Spieluhr", difficulty: 350, language: "German" },
-  { snippet: "deutsch 2", artist: "Hoffmann von Fallersleben", song: "Die Gedanken sind frei", difficulty: 400, language: "German" },
-  { snippet: "deutsch 3", artist: "AnnenMayKantereit", song: "Traumtänzer", difficulty: 450, language: "German" },
-  { snippet: "deutsch 4", artist: "Cro", song: "Einmal um die Welt", difficulty: 300, language: "German" },
-  { snippet: "deutsch 5", artist: "Wir sind Helden", song: "Denkmal", difficulty: 500, language: "German" }
+  # { snippet: "deutsch 1", artist: "Rammstein", song: "Spieluhr", difficulty: 350, language: "German" },
+  # { snippet: "deutsch 2", artist: "Hoffmann von Fallersleben", song: "Die Gedanken sind frei", difficulty: 400, language: "German" },
+  # { snippet: "deutsch 3", artist: "AnnenMayKantereit", song: "Traumtänzer", difficulty: 450, language: "German" },
+  # { snippet: "deutsch 4", artist: "Cro", song: "Einmal um die Welt", difficulty: 300, language: "German" },
+  # { snippet: "deutsch 5", artist: "Wir sind Helden", song: "Denkmal", difficulty: 500, language: "German" }
 ]
 
 # Create lyric snippets

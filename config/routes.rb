@@ -39,4 +39,6 @@ Rails.application.routes.draw do
   get "fetch_snippets", to: "snippets#fetch_snippets"
 
   resources :friendships, only: [:index, :create, :update, :destroy]
+
+  get "test", to: "snippets#test"
 end

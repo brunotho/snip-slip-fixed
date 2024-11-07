@@ -1,3 +1,4 @@
+console.log("user_profile.ks HELLLLO")
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import UserProfile from '../components/UserProfile'

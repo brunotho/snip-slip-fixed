@@ -42,6 +42,9 @@ function SinglePlayerGame({
   // Display a loading message while snippets are being fetched
   if (loading) return <div>Loading Snippets...</div>;
 
+
+  console.log("hello before singleplayergame return");
+
   return (
     <GameLayout
       // Main content: either the expanded snippet view or the list of snippet cards

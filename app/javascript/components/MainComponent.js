@@ -6,6 +6,9 @@ import GameOver from './GameOver';
 function MainComponent({ gameSessionId = null }) {
   console.log("MainComponent rendering with gameSessionId:", gameSessionId);
   console.log("🤡");
+  console.log("update pls")
+  console.log("🤡");
+
 
 
   const [gameStarted, setGameStarted] = useState(false);
