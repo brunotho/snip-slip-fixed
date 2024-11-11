@@ -1,5 +1,6 @@
 @import './variables';
 
+// button styles:
 @mixin button-variant($bg-color, $text-color) {
   color: $text-color;
   background-color: $bg-color;
@@ -46,6 +47,30 @@
 
 .btn-accent {
   @include button-variant($color-brand-accent, $color-brand-primary);
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn-accent-emphasized {
+  @extend .btn-accent;  // Get base styles including disabled state
+
+  // Only apply emphasized styles when not disabled
+  &:not(:disabled):not(.disabled) {
+
+    &:not(:active):not(:focus):not(:hover) {  // Base state when enabled
+      background-color: darken($color-brand-accent, 10%) !important;
+      box-shadow: 0 0 0 1px black !important;
+    }
+
+    &:hover {
+      box-shadow: 0 0 0 1px $color-brand-accent;
+      background-color: darken($color-brand-accent, 30%);
+    }
+  }
 }
 
 .btn-positive {
@@ -56,14 +81,35 @@
   @include button-variant($color-action-negative, $color-brand-primary);
 }
 
-.btn-submit {
-  @include button-variant($color-action-submit, $bg-white)
+// .btn-submit {
+//   @include button-variant($color-action-submit, $color-brand-primary)
+// }
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+
+    .fa-check {
+      color: $color-action-positive !important;
+    }
+
+    .fa-xmark {
+      color: $color-action-negative !important;
+    }
+  }
 }
 
-.result-button-container {
-  display: flex;
-  gap: 10px;
-}
+
 
 .button-fancy {
   --b: 3px;
@@ -74,8 +120,8 @@
   color: var(--color);
   --_p: var(--s);
   background:
-    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
-    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+  var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
   transition: .2s linear, color 0s, background-color 0s;
   outline: var(--b) solid #0000;
   outline-offset: .6em;
@@ -104,6 +150,12 @@
   color: #fff;
 }
 
+// button divs:
+.button-container {
+  display: flex;
+  // gap: 10px;
+  gap: 0.5rem;
+}
 
 .button-group {
   display: grid;

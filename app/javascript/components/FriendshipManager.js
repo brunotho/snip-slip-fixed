@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { debounce } from 'lodash';
 import ConstrainedLayout from './ConstrainedLayout';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
 const FriendshipManager = () => {
   const container = document.getElementById("friendship-manager");
   const initialData = JSON.parse(container.dataset.friendships || "{}");
@@ -208,11 +212,15 @@ const FriendshipManager = () => {
             {friends.map((friend) => (
               <div key={friend.id} className="d-flex justify-content-between align-items-center mb-2">
                 <span>{friend.name}</span>
-                <button className="btn btn-danger btn-sm" onClick={() => removeFriend(friend.id)}>Remove Friend</button>
+                  <button className="btn-icon" onClick={() => removeFriend(friend.id)}>
+                    <FontAwesomeIcon icon={faXmark} />
+                  </button>
               </div>
             ))}
           </div>
         </div>
+
+
 
         <div className="card mb-4">
           <div className="card-header">Pending Friend Requests</div>
@@ -229,9 +237,13 @@ const FriendshipManager = () => {
             {receivedRequests.map((request) => (
               <div key={request.id} className="d-flex justify-content-between align-items-center mb-2">
                 <span>{request.name}</span>
-                <div>
-                  <button className="btn btn-success btn-sm me-2" onClick={() => acceptFriendRequest(request.id)}>Accept</button>
-                  <button className="btn btn-secondary btn-sm" onClick={() => declineFriendRequest(request.id)}>Decline</button>
+                <div className="button-container">
+                  <button className="btn-icon" onClick={() => acceptFriendRequest(request.id)}>
+                    <FontAwesomeIcon icon={faCheck} />
+                  </button>
+                  <button className="btn-icon" onClick={() => declineFriendRequest(request.id)}>
+                    <FontAwesomeIcon icon={faXmark} />
+                  </button>
                 </div>
               </div>
             ))}

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../stylesheets/_button_styles.scss'
+import '../stylesheets/_button_styles.scss';
 
 function ExpandedSnippet({ snippet, onSubmit, game_session_id, onNext }) {
   const handleSuccess = () => {
@@ -18,8 +18,8 @@ function ExpandedSnippet({ snippet, onSubmit, game_session_id, onNext }) {
 
   return (
     <div
-      className="card mb-4"
-      style={{ height: '65vh', width: "80%", overflow: 'hidden' }}
+      className="card mb-4 w-100"
+      style={{ height: '65vh', overflow: 'hidden' }}
     >
       <div className="row no-gutters h-100">
         <div className="col d-flex flex-column h-100">
@@ -28,7 +28,7 @@ function ExpandedSnippet({ snippet, onSubmit, game_session_id, onNext }) {
               {snippet.snippet}
             </p>
           </div>
-          <div className="result-button-container p-2" style={{ flexShrink: 0 }}>
+          <div className="button-container p-2" style={{ flexShrink: 0 }}>
             {game_session_id ? (
               <>
                 <button className="button-fancy button-fancy-success" onClick={handleSuccess}>
@@ -46,7 +46,7 @@ function ExpandedSnippet({ snippet, onSubmit, game_session_id, onNext }) {
           </div>
         </div>
 
-{/* right side */}
+        {/* Right side */}
         <div
           className="col-auto d-flex flex-column h-100"
           style={{ overflow: 'hidden' }}

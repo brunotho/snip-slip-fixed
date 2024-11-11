@@ -193,7 +193,7 @@ const GameInviteManager = () => {
                       <div key={friend.id} className="d-flex justify-content-between align-items-center mb-2">
                         <span>{friend.name}</span>
                         <button
-                          className="btn btn-primary btn-negative btn-sm"
+                          className="btn btn-primary btn-accent btn-sm"
                           onClick={() => inviteFriend(friend)}
                           disabled={invitedPlayers.includes(friend.user_id)}
                         >
@@ -228,7 +228,7 @@ const GameInviteManager = () => {
         <div className="text-center mt-4">
           {isHost ? (
             <button
-              className="btn btn-success btn-submit btn-lg"
+              className="btn btn-primary btn-accent-emphasized btn-lg"
               disabled={joinedPlayers.length < 2}
               onClick={startGame}
             >

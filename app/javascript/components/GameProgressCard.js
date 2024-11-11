@@ -34,11 +34,11 @@ export default function GameProgressCard({
             <div
               key={index}
               className="d-flex align-items-center p-1 border-bottom small"
-              style={{ margin: "0 -2px" }} // Reduced side margin for compactness
+              style={{ margin: "0 -2px" }}
             >
               <FontAwesomeIcon
                 icon={round.success ? faCheck : faXmark}
-                className="me-2 text-muted" // Set icon color to muted gray
+                className="me-2 text-muted"
               />
               <span>{round.lyric_snippet.snippet}</span>
             </div>

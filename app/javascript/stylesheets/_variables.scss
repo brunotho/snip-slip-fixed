@@ -10,23 +10,28 @@
 // $soft-coral: #f79b9b;
 
 // $bg-white: #ffffff;
-$bg-white: #eeeeee;
-$bg-off-white: #fafafa;
-$bg-light: #f5f5f7;
-
-$dusty-rose: #dca1a1;
-$ash-gray: #96bbbbff;
-$hookers-green: #618985ff;
+// $bg-off-white: #fafafa;
+// $bg-light: #f5f5f7;
+// $ash-gray: #96bbbbff;
+// $hookers-green: #618985ff;
 $azul: #016fb9ff;
 
-$jet: #252525;
 
+
+$bg-white: #eeeeee;
+// $bg-white: #ffffff;
+$jet: #252525;
+$dusty-rose: #dca1a1;
+
+$new-white: $bg-white;
 $new-black: $jet;
 
-$color-brand-primary: $jet;
-$color-brand-secondary: $jet;
+$color-brand-primary: $new-white;
+$color-brand-secondary: $new-black;
 $color-brand-accent: $dusty-rose;
 
-$color-action-positive: $ash-gray;
-$color-action-negative: $hookers-green;
+$color-action-positive: green;
+$color-action-negative: rgb(220, 20, 20);
+
+
 $color-action-submit: $azul;

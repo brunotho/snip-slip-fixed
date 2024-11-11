@@ -13,7 +13,7 @@ function SnippetCard({ snippet, onClick }) {
 
   return (
     <div
-      className="card mb-4"
+      className="card shadow mb-4"
       onClick={onClick}
       style={{ cursor: 'pointer' }}
     >
@@ -38,7 +38,7 @@ function SnippetCard({ snippet, onClick }) {
           <img
             src={snippet.image_url}
             alt={`${snippet.song} Album Cover`}
-            style={{ height: '100%', width: '150px', objectFit: 'cover' }}
+            style={{ height: '100%', width: '150px', objectFit: 'cover', borderRadius: '0 0.25rem 0.25rem 0' }}
             />
         </div>
       </div>
@@ -47,4 +47,3 @@ function SnippetCard({ snippet, onClick }) {
 }
 
 export default SnippetCard;
-
