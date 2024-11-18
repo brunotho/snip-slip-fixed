@@ -6,11 +6,6 @@ function SnippetCard({ snippet, onClick }) {
     return <div>No snippet data available</div>;
   }
 
-  console.log("👽👽👽👽👽👽👽");
-
-  console.log('Full snippet:', snippet)
-  console.log('Image URL:', snippet.image_url)
-
   return (
     <div
       className="card shadow mb-4"

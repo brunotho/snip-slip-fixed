@@ -1,6 +1,6 @@
 @import './variables';
 
-// button styles:
+// // // // // button styles:
 @mixin button-variant($bg-color, $text-color) {
   color: $text-color;
   background-color: $bg-color;
@@ -56,30 +56,35 @@
 }
 
 .btn-accent-emphasized {
-  @extend .btn-accent;  // Get base styles including disabled state
+  @extend .btn-accent;
+  transition: all 0.2s ease;
 
-  // Only apply emphasized styles when not disabled
   &:not(:disabled):not(.disabled) {
-
-    &:not(:active):not(:focus):not(:hover) {  // Base state when enabled
+    &:not(:active):not(:focus):not(:hover) {
       background-color: darken($color-brand-accent, 10%) !important;
-      box-shadow: 0 0 0 1px black !important;
+      filter: drop-shadow(0 0 4px $color-brand-accent) !important;
     }
 
     &:hover {
-      box-shadow: 0 0 0 1px $color-brand-accent;
-      background-color: darken($color-brand-accent, 30%);
+      background-color: darken($color-brand-accent, 20%);
+      filter: drop-shadow(0 0 4px darken($color-brand-accent, 20%)) !important;
+      transform: scale(1.01);
+      transition: transform 0.2s ease;
     }
   }
 }
 
-.btn-positive {
-  @include button-variant($color-action-positive, $color-brand-primary);
+.btn-cancel {
+  @include button-variant((lighten($color-brand-secondary, 40%)), $color-brand-primary);
 }
 
-.btn-negative {
-  @include button-variant($color-action-negative, $color-brand-primary);
-}
+// .btn-positive {
+//   @include button-variant($color-action-positive, $color-brand-primary);
+// }
+
+// .btn-negative {
+//   @include button-variant($color-action-negative, $color-brand-primary);
+// }
 
 // .btn-submit {
 //   @include button-variant($color-action-submit, $color-brand-primary)
@@ -99,6 +104,10 @@
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
 
+    .fa-plus {
+      color: $color-action-positive !important;
+
+    }
     .fa-check {
       color: $color-action-positive !important;
     }
@@ -150,7 +159,7 @@
   color: #fff;
 }
 
-// button divs:
+// // // // // button divs:
 .button-container {
   display: flex;
   // gap: 10px;

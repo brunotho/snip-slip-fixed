@@ -55,7 +55,6 @@ export default function UserProfile({ initialUser = {}, languages = [] }) {
 
   return (
     <ConstrainedLayout>
-
       {isEditing ? (
         <form onSubmit={handleSubmit} className="border p-4 rounded">
           <h3 className="mb-3">Edit Profile</h3>
@@ -129,15 +128,15 @@ export default function UserProfile({ initialUser = {}, languages = [] }) {
           )}
 
           <div className="d-flex justify-content-between">
-            <button type="submit" className="btn btn-primary">Save</button>
-            <button type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>Cancel</button>
+            <button type="submit" className="btn btn-primary btn-accent">Save</button>
+            <button type="button" className="btn btn-secondary btn-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
           </div>
         </form>
       ) : (
         <div className="border p-4 rounded">
           <h3 className="mb-3">{user.name}</h3>
           <p><strong>Language:</strong> {user.language}</p>
-          <button className="btn btn-primary" onClick={() => setIsEditing(true)}>Edit Profile</button>
+          <button className="btn btn-primary btn-accent" onClick={() => setIsEditing(true)}>Edit Profile</button>
         </div>
       )}
     </ConstrainedLayout>

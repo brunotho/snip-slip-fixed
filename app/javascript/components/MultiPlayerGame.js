@@ -23,8 +23,11 @@ function MultiPlayerGame({
 
   useEffect(() => {
     if (!game_session_id) return;
-    console.log("initial gameData:", gameData)
+
     console.log("🤡🤡🤡🤡");
+    console.log("MULTIPLAYER initial gameData:")
+    console.log(gameData)
+
     const gameChannel = createGameSessionChannel(game_session_id);
 
     // updating gameData on every round_submit
@@ -89,6 +92,8 @@ function MultiPlayerGame({
 
     return () => {
       gameChannel.unsubscribe();
+      console.log("UNSUBBED");
+
     };
   }, [game_session_id, gameData]);
 
@@ -104,8 +109,13 @@ function MultiPlayerGame({
   if (error) return <div>Error loading snippets: {error.message}</div>;
   if (loading) return <div>Loading snippets... </div>;
 
-  console.log("😪😯🤐😯🤐😫😪😯🤐");
+
+  console.log("MULTIPLAYER before return gameData:")
   console.log(gameData);
+
+  console.log("before return players:");
+  console.log(players)
+
 
   return (
     <GameLayout

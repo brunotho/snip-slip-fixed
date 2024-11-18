@@ -14,14 +14,14 @@ export default function GameProgressCard({
 
   return (
     <div
-      className={`p-2 rounded-lg shadow bg-light`}
-      style={{
-        border: winner ? "4px solid purple" : "2px solid #e0e0e0",
-        borderRadius: "8px",
-        transition: "border-color 0.3s ease",
-      }}
+      className={`p-2 rounded-lg shadow bg-light game-progress-card ${winner ? 'game-progress-card--winner' : 'game-progress-card--default'}`}
+      // style={{
+      //   border: winner ? "4px solid purple" : "2px solid #e0e0e0",
+      //   borderRadius: "8px",
+      //   transition: "border-color 0.3s ease",
+      // }}
     >
-      <div className="mb-2">
+      <div className={roundHistory.length > 0 ? "mb-1" : ""}>
         <div className="fw-bold" style={{ fontSize: "1.1em" }}>{playerName}</div>
         <div className="text-dark" style={{ fontSize: "0.9em" }}>
           <span>Score: {totalScore}</span> | <span>Rounds: {roundsPlayed}/{maxRounds}</span>
@@ -29,12 +29,12 @@ export default function GameProgressCard({
       </div>
 
       {roundHistory.length > 0 && (
-        <div className="mt-3">
+        <div>
           {roundHistory.map((round, index) => (
             <div
               key={index}
-              className="d-flex align-items-center p-1 border-bottom small"
-              style={{ margin: "0 -2px" }}
+              className="d-flex align-items-center border-top small"
+              style={{ padding: "0.25rem 0.25rem 0 0.25rem", margin: "0 -2px" }}
             >
               <FontAwesomeIcon
                 icon={round.success ? faCheck : faXmark}

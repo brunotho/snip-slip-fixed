@@ -15,23 +15,33 @@
 // $ash-gray: #96bbbbff;
 // $hookers-green: #618985ff;
 $azul: #016fb9ff;
-
-
-
-$bg-white: #eeeeee;
-// $bg-white: #ffffff;
 $jet: #252525;
+$mint: #68d391;
+// $bg-white: #eeeeee;
 $dusty-rose: #dca1a1;
+$bright-teal: #4fd1c5;
+$muted-teal: #38b2ac;
+
+
+$bg-white: #f8fafc;
+$obsidian: #1a1b1f;
 
 $new-white: $bg-white;
-$new-black: $jet;
+$new-black: $obsidian;
 
 $color-brand-primary: $new-white;
 $color-brand-secondary: $new-black;
-$color-brand-accent: $dusty-rose;
+// $color-brand-accent: $dusty-rose;
+$color-brand-accent: $muted-teal;
+// $color-brand-accent: $bright-teal;
+// $color-brand-accent: $mint;
 
 $color-action-positive: green;
 $color-action-negative: rgb(220, 20, 20);
 
-
-$color-action-submit: $azul;
+// $color-action-submit: $azul;
+:root {
+  --color-brand-primary: $color-brand-primary
+  --color-brand-secondary: $color-brand-secondary
+  --color-brand-accent: $color-brand-accent
+}

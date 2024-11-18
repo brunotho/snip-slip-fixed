@@ -1,0 +1,14 @@
+@import './variables';
+
+.game-progress-card {
+  border-radius: 0.5rem;
+  transition: border-color 0.3s ease;
+
+  &--winner {
+    border: 0.25rem solid $color-brand-accent;
+  }
+
+  &--default {
+    border: 2px solid $color-brand-secondary;
+  }
+}

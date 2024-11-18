@@ -14,6 +14,7 @@ import FriendshipManager from "./components/FriendshipManager"
 import AddSnippetFormWrapper from "./components/AddSnippetForm"
 import ConstrainedLayout from "./components/ConstrainedLayout"
 import GameInviteManager from "./components/GameInviteManager"
+import UserProfile from "./components/UserProfile"
 
 // Styles
 import "bootstrap/dist/css/bootstrap"
@@ -81,6 +82,24 @@ document.addEventListener('turbo:load', () => {
     console.log('Mounting FriendshipManager component')
     const root = createRoot(friendshipManagerContainer)
     root.render(<FriendshipManager />)
+  }
+
+  const userProfileContainer = document.getElementById('user-profile')
+  if (userProfileContainer) {
+    try {
+      const userData = JSON.parse(userProfileContainer.dataset.user || '{}')
+      const languages = JSON.parse(userProfileContainer.dataset.languages || '[]')
+
+      const root = createRoot(userProfileContainer)
+      root.render(
+        <UserProfile
+          initialUser={userData}
+          languages={languages}
+        />
+      )
+    } catch (error) {
+      console.error("Error initializing UserProfile:", error)
+    }
   }
 
   // AddSnippetFormWrapper

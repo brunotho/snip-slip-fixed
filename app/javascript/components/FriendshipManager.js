@@ -3,6 +3,7 @@ import { debounce } from 'lodash';
 import ConstrainedLayout from './ConstrainedLayout';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -199,8 +200,13 @@ const FriendshipManager = () => {
 
             {searchResults.map((user) => (
               <div key={user.id} className="d-flex justify-content-between align-items-center mb-2">
-                <span>{user.name} ({user.email})</span>
-                <button className="btn btn-primary btn-sm" onClick={() => sendFriendRequest(user.id)}>Send Friend Request</button>
+                <div>
+                  <span className="me-2">{user.name}</span>
+                  <small className="text-muted">{user.email}</small>
+                </div>
+                <button className="btn-icon" onClick={() => sendFriendRequest(user.id)}>
+                  <FontAwesomeIcon icon={faPlus} />
+                </button>
               </div>
             ))}
           </div>
@@ -221,9 +227,9 @@ const FriendshipManager = () => {
         </div>
 
 
-
+        {/* do i need pending friend requests ? */}
         <div className="card mb-4">
-          <div className="card-header">Pending Friend Requests</div>
+          <div className="card-header">Sent Friend Requests</div>
           <div className="card-body">
             {pendingRequests.map((request) => (
               <div key={request.id} className="mb-2">{request.name}</div>

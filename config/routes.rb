@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get "welcome/home"
 
-  get '/users/test', to: 'users#test'
+  # get '/users/test', to: 'users#test'
   get "/users/search", to: "users#search", as: :users_search
 
   get "profile", to: "users#show", as: :user_profile

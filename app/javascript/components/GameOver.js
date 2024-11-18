@@ -4,7 +4,7 @@ import GameLayout from './GameLayout';
 import { createGameSessionChannel } from '../channels/game_session_channel';
 
 function GameOver({ gameData, setGameData, players, setPlayers }) {
-  console.log("GameOver props:", { gameData, players });
+  console.log("GameOver Component --- props:", { gameData, players });
   if (!gameData) return null;
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
 
     gameChannel.received = (data) => {
       console.log("GameOver received update:", data);
-      // console.log("Current gameComplete status:", gameComplete);
+
       if (data.type === "round_completed") {
         console.log("Processing round completion from:", data.player.name);
         console.log("Current scores:", Object.values(players).map(p => `${p.name}: ${p.total_score}`));
@@ -41,7 +41,6 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
         }));
       }
     };
-    // console.log("GameOver mounted with gameComplete:", gameComplete);
 
     return () => {
       console.log("Cleaning up GameOver channel");
@@ -52,19 +51,15 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
 
   const winnerIds = Object.values(players).reduce((highest, player) => {
     if (player.total_score > highest.score) {
-      // New highest score found, reset the ids array
       return { score: player.total_score, ids: [player.id] };
     } else if (player.total_score === highest.score) {
-      // Tie for the highest score, add the current player's id
       return { ...highest, ids: [...highest.ids, player.id] };
     }
-    // No change in the highest score, return the current highest
     return highest;
   }, { score: -1, ids: [] }).ids;
 
 
   console.log("GameOver rendering with:", {
-    // gameComplete,
     players: Object.values(players).map(p => `${p.name}: ${p.total_score}`),
     winnerIds
   });

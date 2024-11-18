@@ -2,8 +2,3 @@
   data-user="<%= current_user.to_json(only: [:id, :name, :email, :language]) %>"
   data-languages="<%= LyricSnippet.languages.to_json %>">
 </div>
-<%#
-<%= javascript_pack_tag "user_profile" %>
-<h1>HELLO</h1>
-<h1>HELLO</h1>
-<h1>HELLO</h1>
