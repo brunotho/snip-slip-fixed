@@ -179,7 +179,7 @@ const FriendshipManager = () => {
 
   return (
     <ConstrainedLayout>
-      <h3 className="text-center">Manage Friendships</h3>
+      <h3 className="text-center">Friends</h3>
       <div className="container mt-4">
         <div className="card mb-4">
           <div className="card-header">Search Users</div>

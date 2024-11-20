@@ -10,16 +10,15 @@ export const createGameSessionChannel = (gameSessionId) => {
     },
     {
       connected() {
-        console.log("😁 Connected to game session channel:", gameSessionId);
-        // this.perform('ping');
+        console.log("game_session_channel.js connected() 🟢:", gameSessionId);
       },
 
       disconnected() {
-        console.log("😅 Disconnected from game session channel:", gameSessionId);
+        console.log("game_session_channel.js disconnected() 🔴:", gameSessionId);
       },
 
       received(data) {
-        console.log("😍 Game session channel received:", data);
+        console.log("GAMESESSIONCHANNEL received data 😍:", data);
         switch(data.type) {
           case "player_joined":
             console.log("Player joined:", data.player.name);
@@ -36,27 +35,20 @@ export const createGameSessionChannel = (gameSessionId) => {
           return data;
       },
 
-      // ping() {
-      //   console.log("Sending ping to game channel");
-      //   this.perform('ping');
-      // },
-
       updateGameSessionState(gameSessionState) {
         this.perform('update_game_session_state', gameSessionState)
       }
     }
   );
 
-  // Store the original received callback from GameInviteManager
   const originalReceived = channel.received;
 
   channel.received = (data) => {
-    console.log("😥😥😥 Channel received data before processing:", data);
     if (originalReceived) {
       originalReceived.call(channel, data);
     }
   };
 
-  console.log("SUBBED to:", channel)
+  console.log("", channel)
   return channel;
 };

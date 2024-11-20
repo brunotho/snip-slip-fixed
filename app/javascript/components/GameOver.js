@@ -3,9 +3,10 @@ import GameProgressCard from './GameProgressCard';
 import GameLayout from './GameLayout';
 import { createGameSessionChannel } from '../channels/game_session_channel';
 
-function GameOver({ gameData, setGameData, players, setPlayers }) {
-  console.log("GameOver Component --- props:", { gameData, players });
+function GameOver({ gameData, setGameData }) {
   if (!gameData) return null;
+
+  console.log("GAMEOVER gameData:", { gameData });
 
   useEffect(() => {
     console.log("Setting up GameOver channel with session:", gameData.game_session_id);
@@ -15,29 +16,19 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
       console.log("GameOver received update:", data);
 
       if (data.type === "round_completed") {
-        console.log("Processing round completion from:", data.player.name);
-        console.log("Current scores:", Object.values(players).map(p => `${p.name}: ${p.total_score}`));
-        setPlayers(prevPlayers => {
-          console.log("Current players state:", prevPlayers);
-          const newState = {
-            ...prevPlayers,
-            [data.player.id]: {
-              id: data.player.id,
-              name: data.player.name,
-              rounds_played: data.player.rounds_played,
-              successful_rounds_count: data.player.successful_rounds_count,
-              total_score: data.player.total_score,
-              round_history: data.player.round_history
-            }
-          };
-          console.log("New players state:", newState);
-          return newState;
-        });
-
         setGameData(prevGameData => ({
           ...prevGameData,
-          currentPlayerName: data.name,
-          gameOver: data.game_over
+          players: {
+            ...prevGameData.players,
+            [data.player.id]: data.player
+              // id: data.player.id,
+              // name: data.player.name,
+              // rounds_played: data.player.rounds_played,
+              // total_score: data.player.total_score,
+              // round_history: data.player.round_history
+            // }
+          },
+          gameOver: data.game_over,
         }));
       }
     };
@@ -48,8 +39,15 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
     };
   }, [gameData.game_session_id]);
 
+  const gameMode = Object.values(gameData.players).length > 1 ? 'multi' : 'single'
+  // const currentPlayerName = gameData.currentPlayerName
+  // const currentPlayerTotalScore =
 
-  const winnerIds = Object.values(players).reduce((highest, player) => {
+
+  const winnerIds = Object.values(gameData.players).reduce((highest, player) => {
+    console.log("Winner ids calucalted with:");
+    console.log(gameData.players);
+
     if (player.total_score > highest.score) {
       return { score: player.total_score, ids: [player.id] };
     } else if (player.total_score === highest.score) {
@@ -58,9 +56,8 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
     return highest;
   }, { score: -1, ids: [] }).ids;
 
-
   console.log("GameOver rendering with:", {
-    players: Object.values(players).map(p => `${p.name}: ${p.total_score}`),
+    players: Object.values(gameData.players).map(p => `${p.name}: ${p.total_score}`),
     winnerIds
   });
 
@@ -74,12 +71,11 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
             <div className="d-flex justify-content-center">
               <div className="col-md-6">
                 <GameProgressCard
-                  playerName={gameData.currentPlayerName}
-                  totalScore={gameData.totalScore}
-                  roundsPlayed={gameData.roundsPlayed}
-                  successfulRoundsCount={gameData.successfulRoundsCount}
-                  roundHistory={gameData.roundHistory}
-                  winner={gameData.gameOver && winnerIds.includes(gameData.currentPlayerId)}
+                  playerName={Object.keys(gameData.players).length > 1 ? gameData.currentPlayerName : ""}
+                  totalScore={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].total_score : gameData.totalScore}
+                  roundsPlayed={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].rounds_played : gameData.roundsPlayed}
+                  roundHistory={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].round_history : gameData.roundHistory}
+                  winner={gameData.gameOver && winnerIds.includes(gameData.currentPlayerId) && Object.keys(gameData.players).length > 1}
                 />
               </div>
             </div>
@@ -90,7 +86,7 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
     sideContent={
       <div className="multiplayer-progress">
         <div>
-          {Object.values(players)
+          {Object.values(gameData.players)
             .filter(player => player.id !== gameData.currentPlayerId)
             .map(player => (
               <div key={player.id} className="mb-3">
@@ -98,7 +94,6 @@ function GameOver({ gameData, setGameData, players, setPlayers }) {
                   playerName={player.name}
                   totalScore={player.total_score}
                   roundsPlayed={player.rounds_played}
-                  successfulRoundsCount={player.successful_rounds_count}
                   roundHistory={player.round_history}
                   winner={gameData.gameOver && winnerIds.includes(player.id)}
                 />

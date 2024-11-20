@@ -28,7 +28,6 @@ class RoundsController < ApplicationController
         game_session: {
           total_score: @game_session.total_score(current_user),
           rounds_played: @game_session.rounds.where(user: current_user).count,
-          successful_rounds_count: @game_session.rounds.where(user: current_user, success: true).count,
           status: @game_session.status,
           player_game_over: player_game_over?,
           game_over: !@game_session.status
@@ -36,7 +35,6 @@ class RoundsController < ApplicationController
       }
 
       if @game_session.multiplayer?
-        p "🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡"
         broadcast_data = {
           type: "round_completed",
           game_over: multiplayer_game_over?,
@@ -44,7 +42,6 @@ class RoundsController < ApplicationController
             id: current_user.id,
             name: current_user.name,
             rounds_played: @game_session.rounds.where(user: current_user).count,
-            successful_rounds_count: @game_session.rounds.where(user: current_user, success: true).count,
             total_score: @game_session.total_score(current_user),
             round_history: @game_session.rounds.where(user_id: current_user.id).map do |round|
               {
@@ -55,6 +52,10 @@ class RoundsController < ApplicationController
           }
         }
         GameSessionChannel.broadcast_to(@game_session, broadcast_data)
+        ApplicationCable::Channel.broadcast_to(
+          current_user,
+          broadcast_data
+        )
       end
 
       render json: response_data, status: 201

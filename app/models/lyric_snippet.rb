@@ -34,7 +34,7 @@ class LyricSnippet < ApplicationRecord
   end
 
   def normalize_artist_name(name)
-    name.downcase.gsub(/[^a-z0-9\s]/i, '').strip
+    name.downcase.gsub(/[^a-z0-9\s]/i, "").strip
   end
 
   def find_best_album_match(response, artist_name)
@@ -64,12 +64,11 @@ class LyricSnippet < ApplicationRecord
     )
 
     p "🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰 START #{artist_name} -- #{song_name}"
-    puts "Full URL with query: #{response.request.last_uri.to_s}"
-    puts "Base URI: #{response.request.uri.to_s}"
-    puts "Path: #{response.request.path}"
-    puts "Query string: #{response.request.uri.query}"
-
-    puts "HTTParty encoded params: #{URI.decode_www_form(response.request.uri.query).to_h}"
+    p "Full URL with query: #{response.request.last_uri}"
+    p "Base URI: #{response.request.uri}"
+    p "Path: #{response.request.path}"
+    p "Query string: #{response.request.uri.query}"
+    p "HTT🥳 encoded params: #{URI.decode_www_form(response.request.uri.query).to_h}"
     p response
     # response["albums"]["items"][0]["images"][0]["url"]
     response

@@ -60,7 +60,7 @@ const GameInviteManager = () => {
       setIsHost(data.is_host);
 
       if (data.players) {
-        setJoinedPlayers(data.players.map(player => ({
+        setJoinedPlayers(Object.values(data.players).map(player => ({
           id: player.id,
           name: player.name
         })));

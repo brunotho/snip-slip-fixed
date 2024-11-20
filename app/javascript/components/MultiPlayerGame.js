@@ -13,87 +13,36 @@ function MultiPlayerGame({
   setSelectedSnippet,
   gameData,
   setGameData,
-  roundHistory,
   handleSubmit,
   game_session_id,
-  players,
-  setPlayers
 }) {
-  const initialized = useRef(false);
+  // const initialized = useRef(false);
 
   useEffect(() => {
     if (!game_session_id) return;
 
     console.log("🤡🤡🤡🤡");
-    console.log("MULTIPLAYER initial gameData:")
-    console.log(gameData)
+    console.log("MULTIPLAYER initial gameData:", gameData)
 
     const gameChannel = createGameSessionChannel(game_session_id);
 
     // updating gameData on every round_submit
     gameChannel.received = (data) => {
-      console.log("(useEffect) 🤩 received data:", JSON.stringify(data, null, 2));
       if (data.type === "round_completed") {
-        console.log("player:", data.player.id);
-        console.log("new data:", JSON.stringify(data.player, null, 2));
-
-
-        setPlayers(prevPlayers => {
-          console.log("prevPlayers:", JSON.stringify(prevPlayers, null, 2));
-          const newState = {
-            ...prevPlayers,
-            [data.player.id]: {
-              id: data.player.id,
-              name: data.player.name,
-              rounds_played: data.player.rounds_played,
-              successful_rounds_count: data.player.successful_rounds_count,
-              total_score: data.player.total_score,
-              round_history: data.player.round_history
-            }
-          };
-          console.log("newState:", JSON.stringify(newState, null, 2));
-          return newState;
-        });
-
-        console.log("SETGAMEDATA IN MULTIPLAYER");
-        console.log(data);
-        console.log(data.game_over);
-
-
         setGameData(prevGameData => ({
           ...prevGameData,
+          players: {
+            ...prevGameData.players,
+            [data.player.id]: data.player
+          },
           gameOver: data.game_over
         }));
       }
     };
-    ///////////////////////////////////////
-
-    if (!initialized.current) {
-      console.log("(useEffect) gameData:", gameData);
-      const initialPlayers = {};
-      if (gameData.players) {
-
-        gameData.players.forEach(player => {
-          initialPlayers[player.id] = {
-            id: player.id,
-            name: player.name,
-            rounds_played: player.rounds_played,
-            successful_rounds_count: player.successful_rounds_count,
-            total_score: player.total_score
-          };
-        });
-      }
-      setPlayers(initialPlayers);
-      initialized.current = true;
-
-      console.log("setting initial initialPlayers", initialPlayers);
-      console.log("setting initial players", players);
-    }
 
     return () => {
       gameChannel.unsubscribe();
       console.log("UNSUBBED");
-
     };
   }, [game_session_id, gameData]);
 
@@ -102,20 +51,14 @@ function MultiPlayerGame({
       await handleSubmit(snippet_id, success);
 
     } catch (error) {
-      console.error("Error submitting round (mp):", error)
+      console.error("Error submitting round (MultiPlayer):", error)
     }
   };
 
   if (error) return <div>Error loading snippets: {error.message}</div>;
   if (loading) return <div>Loading snippets... </div>;
 
-
-  console.log("MULTIPLAYER before return gameData:")
-  console.log(gameData);
-
-  console.log("before return players:");
-  console.log(players)
-
+  console.log("MULTIPLAYER before return gameData 🌷🌷🌷:", gameData)
 
   return (
     <GameLayout
@@ -143,16 +86,15 @@ function MultiPlayerGame({
         <div className="multiplayer-progress">
           <div className="mb-4">
             <GameProgressCard
-              playerName={gameData.currentPlayerName}
-              totalScore={gameData.totalScore}
-              roundsPlayed={gameData.roundsPlayed}
-              successfulRoundsCount={gameData.successfulRoundsCount}
-              roundHistory={roundHistory}
+              playerName={gameData.players[gameData.currentPlayerId].name}
+              totalScore={gameData.players[gameData.currentPlayerId].total_score}
+              roundsPlayed={gameData.players[gameData.currentPlayerId].rounds_played}
+              roundHistory={gameData.players[gameData.currentPlayerId].round_history}
             />
           </div>
 
           <div>
-            {Object.values(players)
+            {Object.values(gameData.players)
               .filter(player => player.id !== gameData.currentPlayerId)
               .map(player => (
                 <div key={player.id} className="mb-3">
@@ -160,7 +102,6 @@ function MultiPlayerGame({
                     playerName={player.name}
                     totalScore={player.total_score}
                     roundsPlayed={player.rounds_played}
-                    successfulRoundsCount={player.successful_rounds_count}
                     roundHistory={player.round_history}
                   />
                 </div>

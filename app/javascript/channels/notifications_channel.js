@@ -2,11 +2,11 @@ import consumer from "./consumer";
 
 consumer.subscriptions.create("NotificationsChannel", {
   connected() {
-    console.log("Notifications Channel ☑");
+    console.log("notifications_channel.js connected() 🟢");
   },
 
   disconnected() {
-    console.log("Disconnected from notifications channel");
+    console.log("notifications_channel.js disconnected() 🔴");
   },
 
   received(data) {
@@ -77,7 +77,6 @@ consumer.subscriptions.create("NotificationsChannel", {
       return
     }
 
-    // Wait for next tick to ensure DOM is updated
     setTimeout(() => {
       const bsModal = new bootstrap.Modal(modalElement)
 
