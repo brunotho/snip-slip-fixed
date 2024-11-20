@@ -43,12 +43,6 @@ class GameSessionsController < ApplicationController
   end
 
   def invite_friend
-    p "🤡🤡🤡🤡🤡🤡"
-    puts "===================="
-    puts "Params received: #{params.inspect}"
-    puts "Friend ID received: #{params[:friend_id]}"
-    puts "===================="
-    # raise
     friend = User.find(params[:friend_id])
     if current_user.invitable_friend?(friend)
       broadcast_game_invitation(friend)
@@ -59,10 +53,6 @@ class GameSessionsController < ApplicationController
   end
 
   def broadcast_game_invitation(user)
-    p "😎😎😎😎😎"
-    Rails.logger.info "=== Broadcasting invitation ==="
-    Rails.logger.info "Game Session: #{@game_session.id}"
-    Rails.logger.info "To user: #{user.inspect}"
     ActionCable.server.broadcast(
       "user_notifications",
       {
@@ -81,25 +71,15 @@ class GameSessionsController < ApplicationController
   end
 
   def accept_invitation
-    # Rails.logger.info "=== Accept Invitation ==="
-    # Rails.logger.info "Game Session ID: #{params[:id]}"
-    # Rails.logger.info "Current User: #{current_user.inspect}"
-
     @game_session = GameSession.find(params[:id])
-    # Rails.logger.info "Game Session found: #{@game_session.inspect}"
-    # Rails.logger.info "Current participants: #{@game_session.game_session_participants.map(&:user_id)}"
-
     begin
       participant = @game_session.game_session_participants.create!(user: current_user)
-      # Rails.logger.info "Participant created: #{participant.inspect}"
       broadcast_player_joined(current_user)
       render json: {
         message: "Successfully joined game",
         redirect_url: invite_game_session_path(@game_session)
       }, status: :ok
     rescue ActiveRecord::RecordInvalid => e
-      # Rails.logger.error "Failed to create participant: #{e.message}"
-      # Rails.logger.error e.record.errors.full_messages
       render json: { error: e.message }, status: 422
     end
   end
@@ -146,12 +126,15 @@ class GameSessionsController < ApplicationController
       successful_rounds_count: game_session.rounds.where(user: current_user, success: true).count,
       rounds_played: game_session.rounds.where(user_id: current_user.id).count,
       status: game_session.status,
-      players: game_session.game_session_participants.map do |participant|
-        { id: participant.user.id,
+      round_history: [],
+      players: game_session.game_session_participants.each_with_object({}) do |participant, hash|
+        hash[participant.user.id] = {
+          id: participant.user.id,
           name: participant.user.name,
           total_score: participant.user.total_score,
           successful_rounds_count: game_session.rounds.where(user: participant.user, success: true).count,
           rounds_played: game_session.rounds.where(user_id: participant.user.id).count,
+          round_history: []
         }
       end,
       multiplayer: game_session.multiplayer?

@@ -31,11 +31,6 @@ class SnippetsController < ApplicationController
                 .order("RANDOM()")
                 .limit(4)
 
-    p "🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡"
-    LyricSnippet.all.each do |snippet|
-      puts "Snippet #{snippet.id}: image attached? #{snippet.image.attached?}"
-    end
-    p "👻👻👻👻👻👻👻👻👻👻👻👻👻"
     render json: snippets.map { |snippet|
       snippet.as_json.merge({
         image_url: snippet.image.attached? ? snippet.image.url : nil

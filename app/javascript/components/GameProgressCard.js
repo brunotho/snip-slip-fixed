@@ -12,6 +12,8 @@ export default function GameProgressCard({
   winner = false,
 }) {
 
+  // console.log("GAMEPROGRESSCARD rendering with:", playerName);
+
   return (
     <div
       className={`p-2 rounded-lg shadow bg-light game-progress-card ${winner ? 'game-progress-card--winner' : 'game-progress-card--default'}`}
