@@ -1,0 +1,13 @@
+@import './variables';
+
+.form-control:focus {
+  border-color: $color-brand-accent !important;
+  box-shadow: 0 0 0 0.25rem rgba($color-brand-accent, 0.25) !important;
+  outline: 0;
+}
+
+// .form-select:focus {
+//   border-color: $color-brand-accent !important;
+//   box-shadow: 0 0 0 0.25rem rgba($color-brand-accent, 0.25) !important;
+//   outline: 0;
+// } ??

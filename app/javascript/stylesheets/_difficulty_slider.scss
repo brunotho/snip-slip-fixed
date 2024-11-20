@@ -1,9 +1,53 @@
 .difficulty-slider-container {
-  margin-top: 20px;
+  margin-top: 1.25rem;
+
+  $track-height: 0.5rem;
+  $thumb-size: 1.25rem;
+  $track-color-start: rgba($color-brand-accent, 0.4);
+  $track-color-end: rgba(darken($color-brand-accent, 20%), 0.4);
+  $thumb-color: $color-brand-primary;
+  $thumb-border: $color-brand-accent;
 
   .slider {
     width: 100%;
     margin-top: 10px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    background: transparent;
+
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: $track-height;
+      background: linear-gradient(to right, $track-color-start, $track-color-end);
+      border-radius: $track-height / 2;
+    }
+
+    &::-moz-range-track {
+      width: 100%;
+      height: $track-height;
+      background: linear-gradient(to right, $track-color-start, $track-color-end);
+      border-radius: $track-height / 2;
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: $thumb-size;
+      width: $thumb-size;
+      border-radius: 50%;
+      background: $thumb-color;
+      border: 2px solid $thumb-border;
+      margin-top: -($thumb-size - $track-height) / 2;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      height: $thumb-size;
+      width: $thumb-size;
+      border-radius: 50%;
+      background: $thumb-color;
+      border: 2px solid $thumb-border;
+      cursor: pointer;
+    }
   }
 
   label {
