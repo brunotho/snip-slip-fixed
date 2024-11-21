@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 
 const GameLayout = ({
   mainContent,
-  sideContent,
+  sideContent = null,
   showSidePanel = true
 }) => {
   return (
     <div className="container-fluid mt-4">
       <div className="row justify-content-center">
         <div className="col-md-2">
-          {/* left column space */}
+          {/* empty left column space */}
         </div>
         <div
           className={`col-md-8 mx-auto`}
