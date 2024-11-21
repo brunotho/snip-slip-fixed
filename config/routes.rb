@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/auth/spotify/callback', to: 'spotify_auth#callback'
+  get '/auth/spotify', to: 'spotify_auth#authenticate'
   mount ActionCable.server => '/cable'
 
   devise_for :users

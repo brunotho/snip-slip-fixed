@@ -6,13 +6,13 @@ class LyricSnippet < ApplicationRecord
   validates :artist, presence: true
   validates :song, presence: true
   validates :difficulty, presence: true, inclusion: { in: 0..1000 }
-  validates :language, inclusion: { in: %w[English German Spanish Russian] }
+  validates :language, inclusion: { in: %w[English German] }
 
   def self.languages
     validators_on(:language).first.options[:in]
   end
 
-  after_create :attach_album_cover
+  before_save :attach_album_cover
 
   private
 
@@ -23,9 +23,10 @@ class LyricSnippet < ApplicationRecord
     image_url = find_best_album_match(spotify_api_call(artist_name, song_name), artist_name)
     return unless image_url
 
-    p "URL:"
+    p "IMAGE_URL:"
     p image_url
     p "😎😋😊😎😋 END"
+
     downloaded_image = URI.open(image_url)
     image.attach(
       io: downloaded_image,
@@ -52,8 +53,7 @@ class LyricSnippet < ApplicationRecord
   end
 
   def spotify_api_call(artist_name, song_name)
-    token = "BQBdNzgNL4i-B9eAuzesgt_Gfzo_43dFkea5-37Xb7FZD3021xP4enLUnTYd2KXLhm203epdcfuwQ6TtiDf_cVI_wFvVTKlK3VtmxO0B6BGxUgG8OJQ"
-
+    token = SpotifyService.get_access_token
     url = "https://api.spotify.com/v1/search?q=20track%3A#{song_name.downcase}%2520artist%3A#{artist_name.downcase}&type=album"
 
     response = HTTParty.get(
@@ -62,7 +62,7 @@ class LyricSnippet < ApplicationRecord
         "Authorization" => "Bearer #{token}"
       }
     )
-
+    p "😪"
     p "🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰 START #{artist_name} -- #{song_name}"
     p "Full URL with query: #{response.request.last_uri}"
     p "Base URI: #{response.request.uri}"
