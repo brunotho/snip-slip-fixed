@@ -7,10 +7,10 @@ function HeroSection({ onPlay }) {
     <div>
       <div
         className="jumbotron text-center d-flex flex-column justify-content-center"
-        style={{ height: '20vh', marginTop: '100px', marginBottom: '50px' }}
+        style={{ height: '20vh', marginTop: '80px', marginBottom: '50px' }}
         >
         <h1 className="display-4">Welcome playa!</h1>
-        <p className="lead">Try to sneak in song lyrics into your conversations.</p>
+        {/* <p className="lead">Press play</p> */}
         <div
           className="mt-4"
           style={{ cursor: "pointer" }}
@@ -26,12 +26,13 @@ function HeroSection({ onPlay }) {
         </div>
       </div>
       <div className="d-flex justify-content-center">
-        <div className="container mt-5 d-flex flex-column align-items-center">
+        <div className="container d-flex flex-column align-items-center">
           <div className="mt-4">
             <ul className="list-unstyled">
               <li>Press Play</li>
-              <li>Select a snippet</li>
-              <li>Slip it into regular conversation without anyone noticing</li>
+              <li>Pick your lyric snippet</li>
+              <li>Slip it into conversation</li>
+              <li>Don't get caught!</li>
             </ul>
           </div>
         </div>

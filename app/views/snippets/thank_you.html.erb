@@ -3,7 +3,7 @@
   <div class="row justify-content-center">
     <div class="col-md-5">
       <div id="snippet-last" data-snippet=
-      '<%= raw(@lyric_snippet.as_json.merge({image_url: @lyric_snippet.image.url}).to_json) %>'
+      '<%= raw(@snippet_data.to_json) %>'
       >
       </div>
     </div>

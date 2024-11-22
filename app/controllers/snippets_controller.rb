@@ -17,6 +17,9 @@ class SnippetsController < ApplicationController
     @lyric_snippet = LyricSnippet.new(snippet_params)
 
     if @lyric_snippet.save
+      @snippet_data = @lyric_snippet.as_json.merge(
+        image_url: @lyric_snippet.image.url
+      )
       render :thank_you
     else
       render :new, status: 422

@@ -17,11 +17,7 @@ export default function GameProgressCard({
   return (
     <div
       className={`p-2 rounded-lg shadow bg-light game-progress-card ${winner ? 'game-progress-card--winner' : 'game-progress-card--default'}`}
-      // style={{
-      //   border: winner ? "4px solid purple" : "2px solid #e0e0e0",
-      //   borderRadius: "8px",
-      //   transition: "border-color 0.3s ease",
-      // }}
+      style={{ maxWidth: "20vw", margin: "0 auto" }}
     >
       <div className={roundHistory.length > 0 ? "mb-1" : ""}>
         <div className="fw-bold" style={{ fontSize: "1.1em" }}>{playerName}</div>

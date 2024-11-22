@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 const GameLayout = ({
   mainContent,
   sideContent = null,
-  showSidePanel = true
+  showSidePanel = true,
+  gameOver = false
 }) => {
   return (
     <div className="container-fluid mt-4">
@@ -20,7 +21,7 @@ const GameLayout = ({
             paddingRight: '2rem',
           }}        >
           <div
-            className="d-flex justify-content-center align-items-center"
+            className={`d-flex justify-content-center ${!gameOver ? 'align-items-center' : ''}`}
             style={{
               height: '80vh',
               overflow: 'hidden',
