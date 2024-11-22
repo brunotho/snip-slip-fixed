@@ -32,10 +32,10 @@ function ExpandedSnippet({ snippet, game_session_id, onSubmit, onNext }) {
             {game_session_id ? (
               <>
                 <button className="button-fancy button-fancy-success" onClick={handleSuccess}>
-                  :)
+                  Snuck it in! 😎
                 </button>
                 <button className="button-fancy button-fancy-fail" onClick={handleFailure}>
-                  :(
+                  Got caught! 😅
                 </button>
               </>
             ) : (

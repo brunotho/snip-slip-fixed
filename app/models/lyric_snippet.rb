@@ -69,7 +69,7 @@ class LyricSnippet < ApplicationRecord
     p "Path: #{response.request.path}"
     p "Query string: #{response.request.uri.query}"
     p "HTT🥳 encoded params: #{URI.decode_www_form(response.request.uri.query).to_h}"
-    p response
+    # p response
     # response["albums"]["items"][0]["images"][0]["url"]
     response
   end

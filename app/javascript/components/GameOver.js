@@ -21,12 +21,6 @@ function GameOver({ gameData, setGameData }) {
           players: {
             ...prevGameData.players,
             [data.player.id]: data.player
-              // id: data.player.id,
-              // name: data.player.name,
-              // rounds_played: data.player.rounds_played,
-              // total_score: data.player.total_score,
-              // round_history: data.player.round_history
-            // }
           },
           gameOver: data.game_over,
         }));
@@ -40,9 +34,6 @@ function GameOver({ gameData, setGameData }) {
   }, [gameData.game_session_id]);
 
   const gameMode = Object.values(gameData.players).length > 1 ? 'multi' : 'single'
-  // const currentPlayerName = gameData.currentPlayerName
-  // const currentPlayerTotalScore =
-
 
   const winnerIds = Object.values(gameData.players).reduce((highest, player) => {
     console.log("Winner ids calucalted with:");
@@ -56,30 +47,28 @@ function GameOver({ gameData, setGameData }) {
     return highest;
   }, { score: -1, ids: [] }).ids;
 
-  console.log("GameOver rendering with:", {
-    players: Object.values(gameData.players).map(p => `${p.name}: ${p.total_score}`),
-    winnerIds
-  });
+  // console.log("GameOver rendering with:", {
+  //   players: Object.values(gameData.players).map(p => `${p.name}: ${p.total_score}`),
+  //   winnerIds
+  // });
 
   return (
     <GameLayout
     mainContent={
-      <div className="container mt-5">
+      <div className="container mt-3">
         <div className="row justify-content-center">
-          <div className="col-md-8">
             <h2 className="mb-4 text-center">Game Over!</h2>
-            <div className="d-flex justify-content-center">
-              <div className="col-md-6">
-                <GameProgressCard
-                  playerName={Object.keys(gameData.players).length > 1 ? gameData.currentPlayerName : ""}
-                  totalScore={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].total_score : gameData.totalScore}
-                  roundsPlayed={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].rounds_played : gameData.roundsPlayed}
-                  roundHistory={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].round_history : gameData.roundHistory}
-                  winner={gameData.gameOver && winnerIds.includes(gameData.currentPlayerId) && Object.keys(gameData.players).length > 1}
-                />
-              </div>
+            <div>
+              {/* <div className="col-md-12"> */}
+              <GameProgressCard
+                playerName={Object.keys(gameData.players).length > 1 ? gameData.currentPlayerName : ""}
+                totalScore={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].total_score : gameData.totalScore}
+                roundsPlayed={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].rounds_played : gameData.roundsPlayed}
+                roundHistory={gameMode === 'multi' ? gameData.players[gameData.currentPlayerId].round_history : gameData.roundHistory}
+                winner={gameData.gameOver && winnerIds.includes(gameData.currentPlayerId) && Object.keys(gameData.players).length > 1}
+              />
+              {/* </div> */}
             </div>
-          </div>
         </div>
       </div>
     }
@@ -103,6 +92,7 @@ function GameOver({ gameData, setGameData }) {
       </div>
     }
     showSidePanel={true}
+    gameOver={true}
   />
   );
 }
