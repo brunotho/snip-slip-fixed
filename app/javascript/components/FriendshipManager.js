@@ -20,8 +20,8 @@ const FriendshipManager = () => {
 
   const debouncedSearch = debounce((term) => searchUsers(term), 300);
 
-  useEffect(() => {
-  }, []);
+  // useEffect(() => {
+  // }, []);
 
   const getCSRFToken = () => {
     const meta = document.querySelector('meta[name="csrf-token"]');
@@ -67,8 +67,6 @@ const FriendshipManager = () => {
       });
       console.log("Search response status:", response.status);
       if (!response.ok) {
-        // const text = await response.text();
-        // console.error("Server response:", text);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
@@ -116,13 +114,11 @@ const FriendshipManager = () => {
         const data = await response.json();
         console.log(data.message);
         if (data.updated_data) {
-          console.log("updating state with new data");
 
           setFriends(data.updated_data.friends);
           setPendingRequests(data.updated_data.pending_requests);
           setReceivedRequests(data.updated_data.received_requests);
         } else {
-          console.log("no updated data, fetching friendships");
 
           await fetchFriendships();
         }
@@ -156,7 +152,6 @@ const FriendshipManager = () => {
       const response = await fetch(`/friendships/${friendshipId}`, {
         method: "DELETE",
         headers: {
-          // "Accept": 'application/json',
           "Content-Type": "application/json",
           "X-CSRF-Token": getCSRFToken(),
         },
@@ -172,19 +167,67 @@ const FriendshipManager = () => {
     }
   };
 
-  console.log("Rendering FriendshipManager");
-  console.log("Friends:", friends);
-  console.log("Pending Requests:", pendingRequests);
-  console.log("Received Requests:", receivedRequests);
-
   return (
     <ConstrainedLayout>
-      <h3 className="text-center">Friends</h3>
-      <div className="container mt-4">
-        <div className="card mb-4">
-          <div className="card-header">Search Users</div>
+      <h3 className="text-center mb-4">Friends</h3>
+      <div className="container">
+        <div className="card mb-4 shadow-sm">
+          <div className="card-header bg-light">
+            <strong>Friends</strong>
+          </div>
           <div className="card-body">
-            <div className="input-group mb-3">
+            {friends.length > 0 ? (
+              friends.map((friend) => (
+                <div key={friend.id}
+                    className="d-flex justify-content-between align-items-center p-2 mb-2 rounded">
+                  <span className="fw-medium">{friend.name}</span>
+                  <button className="btn-icon" onClick={() => removeFriend(friend.id)}>
+                    <FontAwesomeIcon icon={faXmark} />
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-muted py-3">
+                No friends yet. Search for users to add!
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="card mb-4 shadow-sm">
+          <div className="card-header bg-light">
+            <strong>Received Friend Requests</strong>
+          </div>
+          <div className="card-body">
+            {receivedRequests.length > 0 ? (
+              receivedRequests.map((request) => (
+                <div key={request.id}
+                    className="d-flex justify-content-between align-items-center p-2 mb-2 rounded">
+                  <span className="fw-medium">{request.name}</span>
+                  <div className="button-container">
+                    <button className="btn-icon" onClick={() => acceptFriendRequest(request.id)}>
+                      <FontAwesomeIcon icon={faCheck} />
+                    </button>
+                    <button className="btn-icon" onClick={() => declineFriendRequest(request.id)}>
+                      <FontAwesomeIcon icon={faXmark} />
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-muted py-3">
+                No pending requests
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="card mb-4 shadow-sm">
+          <div className="card-header bg-light">
+            <strong>Add New Friends</strong>
+          </div>
+          <div className="card-body">
+            <div className="mb-3">
               <input
                 type="text"
                 className="form-control"
@@ -199,9 +242,10 @@ const FriendshipManager = () => {
             </div>
 
             {searchResults.map((user) => (
-              <div key={user.id} className="d-flex justify-content-between align-items-center mb-2">
+              <div key={user.id}
+                  className="d-flex justify-content-between align-items-center p-2 mb-2">
                 <div>
-                  <span className="me-2">{user.name}</span>
+                  <span className="fw-medium me-2">{user.name}</span>
                   <small className="text-muted">{user.email}</small>
                 </div>
                 <button className="btn-icon" onClick={() => sendFriendRequest(user.id)}>
@@ -212,47 +256,23 @@ const FriendshipManager = () => {
           </div>
         </div>
 
-        <div className="card mb-4">
-          <div className="card-header">Friends</div>
-          <div className="card-body">
-            {friends.map((friend) => (
-              <div key={friend.id} className="d-flex justify-content-between align-items-center mb-2">
-                <span>{friend.name}</span>
-                  <button className="btn-icon" onClick={() => removeFriend(friend.id)}>
-                    <FontAwesomeIcon icon={faXmark} />
-                  </button>
-              </div>
-            ))}
+        <div className="card mb-4 shadow-sm">
+          <div className="card-header bg-light">
+            <strong>Sent Friend Requests</strong>
           </div>
-        </div>
-
-
-        {/* do i need pending friend requests ? */}
-        <div className="card mb-4">
-          <div className="card-header">Sent Friend Requests</div>
           <div className="card-body">
-            {pendingRequests.map((request) => (
-              <div key={request.id} className="mb-2">{request.name}</div>
-            ))}
-          </div>
-        </div>
-
-        <div className="card mb-4">
-          <div className="card-header">Received Friend Requests</div>
-          <div className="card-body">
-            {receivedRequests.map((request) => (
-              <div key={request.id} className="d-flex justify-content-between align-items-center mb-2">
-                <span>{request.name}</span>
-                <div className="button-container">
-                  <button className="btn-icon" onClick={() => acceptFriendRequest(request.id)}>
-                    <FontAwesomeIcon icon={faCheck} />
-                  </button>
-                  <button className="btn-icon" onClick={() => declineFriendRequest(request.id)}>
-                    <FontAwesomeIcon icon={faXmark} />
-                  </button>
+            {pendingRequests.length > 0 ? (
+              pendingRequests.map((request) => (
+                <div key={request.id}
+                    className="p-2 mb-2 rounded hover-bg-light">
+                  <span className="fw-medium">{request.name}</span>
                 </div>
+              ))
+            ) : (
+              <div className="text-center text-muted py-3">
+                No outgoing requests
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
