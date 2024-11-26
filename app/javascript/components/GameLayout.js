@@ -17,8 +17,8 @@ const GameLayout = ({
           className={`col-md-8 mx-auto`}
           style={{
             maxWidth: '65vw',
-            paddingLeft: '2rem',
-            paddingRight: '2rem',
+            // paddingLeft: '2rem',
+            // paddingRight: '2rem',
           }}        >
           <div
             className={`d-flex justify-content-center ${!gameOver ? 'align-items-center' : ''}`}

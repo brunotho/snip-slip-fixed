@@ -26,6 +26,7 @@ english_snippets = [
   { snippet: "It only takes a camera to change her mind", artist: "Kraftwerk", song: "The Model", difficulty: 600, language: "English" },
   { snippet: "I'll let you off easy this one time", artist: "Lana Del Rey", song: "Roses", difficulty: 400, language: "English" },
   { snippet: "You either wanna be with me, or be me", artist: "Nelly Furtado", song: "Maneater", difficulty: 700, language: "English" },
+  { snippet: "Let's pretend for a minute you don't know who I am", artist: "Diddy", song: "Tell me", difficulty: 400, language: "English" },
   { snippet: "You gon' be that next chump", artist: "50 Cent", song: "If I Can't", difficulty: 800, language: "English" }
 ]
 
