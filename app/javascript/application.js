@@ -1,11 +1,9 @@
-console.log("Application.js loading...");
-
 import "@hotwired/turbo-rails"
 import "./controllers"
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-// Import all components
+// Components
 import MainComponent from "./components/MainComponent"
 import SnippetsGame from "./components/SnippetsGame"
 import InviteFriend from "./components/InviteFriend"

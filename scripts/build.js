@@ -1,4 +1,3 @@
-// scripts/build.js
 const esbuild = require('esbuild')
 const sassPlugin = require('esbuild-sass-plugin').sassPlugin
 
@@ -10,19 +9,25 @@ const options = {
   bundle: true,
   outdir: 'app/assets/builds',
   publicPath: '/assets',
-  plugins: [sassPlugin()],
+  plugins: [
+    sassPlugin({
+      loadPaths: ['node_modules'],
+      implementation: 'sass',
+      type: 'style'
+    })
+  ],
   loader: {
     '.js': 'jsx',
     '.scss': 'css'
   },
   logLevel: 'info',
-  metafile: true,   
+  metafile: true,
   sourcemap: true,
-  target: ['es2015']
+  target: ['es2015'],
+  minify: process.env.NODE_ENV === 'production'
 }
 
 if (watchMode) {
-  // Simpler watch mode
   esbuild.context(options).then(context => {
     context.watch()
     console.log('Watching for changes...')
