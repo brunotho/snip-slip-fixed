@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ActiveStorage::SetCurrent
+  
   before_action :configure_permitted_paramters, if: :devise_controller?
   before_action :store_user_location!, if: :storable_location?
 
