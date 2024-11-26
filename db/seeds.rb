@@ -14,7 +14,7 @@ LyricSnippet.find_or_create_by!(
 english_snippets = [
   { snippet: "Hey, Shawty, we could be friends", artist: "50 Cent", song: "Poor Lil Rich", difficulty: 700, language: "English" },
   { snippet: "Stop flattering yourself", artist: "Arctic Monkeys", song: "Do Me A Favour", difficulty: 400, language: "English" },
-  # { snippet: "I forgive you almost all the time", artist: "Lana Del Rey", song: "Roses", difficulty: 500, language: "English" },
+  { snippet: "I forgive you almost all the time", artist: "Lana Del Rey", song: "Roses", difficulty: 500, language: "English" },
   { snippet: "The good are never easy, the easy never good", artist: "Marina", song: "Homewrecker", difficulty: 800, language: "English" },
   { snippet: "But don't mess up my hair", artist: "Lady Gaga", song: "Vanity", difficulty: 200, language: "English" },
   { snippet: "I can be good, if you just wanna be bad", artist: "Lady Gaga", song: "Government Hooker", difficulty: 700, language: "English" },
@@ -24,7 +24,7 @@ english_snippets = [
   { snippet: "Boy I'm tired, let's walk for a minute", artist: "Nelly Furtado", song: "Promiscuous", difficulty: 300, language: "English" },
   { snippet: "You're hard to hug", artist: "Marina", song: "Starring Role", difficulty: 700, language: "English" },
   { snippet: "It only takes a camera to change her mind", artist: "Kraftwerk", song: "The Model", difficulty: 600, language: "English" },
-  # { snippet: "I'll let you off easy this one time", artist: "Lana Del Rey", song: "Roses", difficulty: 400, language: "English" },
+  { snippet: "I'll let you off easy this one time", artist: "Lana Del Rey", song: "Roses", difficulty: 400, language: "English" },
   { snippet: "You either wanna be with me, or be me", artist: "Nelly Furtado", song: "Maneater", difficulty: 700, language: "English" },
   { snippet: "Let's pretend for a minute you don't know who I am", artist: "Diddy", song: "Tell me", difficulty: 400, language: "English" },
   { snippet: "You gon' be that next chump", artist: "50 Cent", song: "If I Can't", difficulty: 800, language: "English" }

@@ -21,17 +21,25 @@ class LyricSnippet < ApplicationRecord
     song_name = song
 
     image_url = find_best_album_match(spotify_api_call(artist_name, song_name), artist_name)
-    return unless image_url
+    # return unless image_url
 
     p "IMAGE_URL:"
     p image_url
     p "😎😋😊😎😋 END"
 
-    downloaded_image = URI.open(image_url)
-    image.attach(
-      io: downloaded_image,
-      filename: "#{artist_name}_#{song_name}.jpg"
-    )
+    if image_url
+      downloaded_image = URI.open(image_url)
+      image.attach(
+        io: downloaded_image,
+        filename: "#{artist_name}_#{song_name}.jpg"
+      )
+    else
+      default_image = File.open(Rails.root.join("app/assets/images/placeholder_album_cover.jpg"))
+      image.attach(
+        io: default_image,
+        filename: "default_album.jpg"
+      )
+    end
   end
 
   def normalize_artist_name(name)
@@ -62,14 +70,16 @@ class LyricSnippet < ApplicationRecord
         "Authorization" => "Bearer #{token}"
       }
     )
-    p "😪"
+
     p "🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰 START #{artist_name} -- #{song_name}"
     p "Full URL with query: #{response.request.last_uri}"
     p "Base URI: #{response.request.uri}"
     p "Path: #{response.request.path}"
     p "Query string: #{response.request.uri.query}"
     p "HTT🥳 encoded params: #{URI.decode_www_form(response.request.uri.query).to_h}"
-    # p response
+    p "😶 full response START:"
+    p response
+    p "😶 full response END"
     # response["albums"]["items"][0]["images"][0]["url"]
     response
   end
