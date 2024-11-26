@@ -88,7 +88,7 @@ Rails.application.configure do
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
 
-  # Don't log any deprecations.
+  # Don"t log any deprecations.
   config.active_support.report_deprecations = false
 
   # Do not dump schema after migrations.
@@ -102,6 +102,7 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  config.active_storage.service = :cloudinary
-  Rails.application.routes.default_url_options[:host] = "snip-slip-21fb4924292b.herokuapp.com"
+  host = ENV["HEROKU_APP_URL"] || "snip-slip-21fb4924292b.herokuapp.com"
+  config.action_controller.default_url_options = { host: host, protocol: "https" }
+  config.active_storage.default_url_options = { host: host, protocol: "https" }
 end
