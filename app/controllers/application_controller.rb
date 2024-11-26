@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include ActiveStorage::SetCurrent
 
-  before_action :set_active_storage_host
+  # before_action :set_active_storage_host
   before_action :configure_permitted_paramters, if: :devise_controller?
   before_action :store_user_location!, if: :storable_location?
 
@@ -18,12 +18,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_active_storage_host
-    ActiveStorage::Current.url_options = {
-      host: ENV.fetch("HEROKU_APP_URL", "snip-slip-21fb4924292b.herokuapp.com"),
-      protocol: "https"
-    }
-  end
+  # def set_active_storage_host
+  #   ActiveStorage::Current.url_options = {
+  #     host: ENV.fetch("HEROKU_APP_URL", "snip-slip-21fb4924292b.herokuapp.com"),
+  #     protocol: "https"
+  #   }
+  # end
 
   def store_user_location!
     store_location_for(:user, request.fullpath)
