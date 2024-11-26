@@ -102,6 +102,6 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  config.active_storage.service = :cloudinaary
+  config.active_storage.service = :cloudinary
   Rails.application.routes.default_url_options[:host] = "snip-slip-21fb4924292b.herokuapp.com"
 end
