@@ -30,7 +30,7 @@ Rails.application.configure do
   config.assets.compile = true
   config.assets.digest = true
 
-  
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
@@ -101,4 +101,7 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.active_storage.service = :cloudinaary
+  Rails.application.routes.default_url_options[:host] = "snip-slip-21fb4924292b.herokuapp.com"
 end
