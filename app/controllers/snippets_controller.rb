@@ -31,6 +31,7 @@ class SnippetsController < ApplicationController
     snippets = LyricSnippet
                 .where(language: user_language)
                 .where.not(snippet: "Dummy snippet for failed rounds")
+                .where(artist: "Arctic Monkeys")
                 .order("RANDOM()")
                 .limit(4)
 

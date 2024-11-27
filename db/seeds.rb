@@ -34,8 +34,8 @@ german_snippets = [
   { snippet: "Ich will dass ihr mir vertraut", artist: "Rammstein", song: "Ich Will", difficulty: 500, language: "German" },
   { snippet: "Die Gedanken sind frei", artist: "Volksweise", song: "Die Gedanken sind frei", difficulty: 400, language: "German" },
   { snippet: "Lass uns gehen, lass uns gehen", artist: "Peter Fox", song: "Haus am See", difficulty: 300, language: "German" },
-  { snippet: "Ich habe einen Koffer in Berlin", artist: "Marlene Dietrich", song: "Ich hab noch einen Koffer in Berlin", difficulty: 600, language: "German" },
-  { snippet: "Manche Träume sind aus Plastik", artist: "Deichkind", song: "Remmidemmi", difficulty: 700, language: "German" }
+  # { snippet: "Ich habe einen Koffer in Berlin", artist: "Marlene Dietrich", song: "Ich hab noch einen Koffer in Berlin", difficulty: 600, language: "German" },
+  # { snippet: "Manche Träume sind aus Plastik", artist: "Deichkind", song: "Remmidemmi", difficulty: 700, language: "German" }
 ]
 
 LyricSnippet.create!(english_snippets + german_snippets)
