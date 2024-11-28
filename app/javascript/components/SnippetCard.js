@@ -8,7 +8,7 @@ function SnippetCard({ snippet, onClick }) {
 
   return (
     <div
-      className="card shadow mb-4"
+      className="card shadow"
       onClick={onClick}
       style={{
         cursor: 'pointer',
@@ -17,7 +17,7 @@ function SnippetCard({ snippet, onClick }) {
         maxWidth: '450px'
       }}
     >
-      <div className="row no-gutters h-100">
+      <div className="row h-100">
         <div className="col">
           <div className="card-body d-flex flex-column h-100">
             <p

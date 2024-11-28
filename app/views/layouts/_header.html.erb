@@ -7,26 +7,22 @@
         <% if user_signed_in? %>
           <%= button_to "Play Alone :<",
               start_single_player_game_sessions_path,
-              class: "btn btn-success me-2 btn-accent",
-              data: { turbolinks: false },
+              class: "btn btn-secondary me-2 btn-accent",
               method: :post
           %>
-          <%= button_to "Play with Friends :>",
+          <%= button_to "Play with Friends :> :>",
               start_multiplayer_game_sessions_path,
-              class: "btn btn-primary btn-accent",
-              data: { turbolinks: false },
+              class: "btn btn-secondary btn-accent",
               method: :post
           %>
-      <% else %>
+        <% else %>
           <%= link_to "Play Alone :<",
               new_user_session_path,
-              class: "btn btn-success me-2 btn-accent",
-              data: { turbolinks: false, target: "_blank" }
+              class: "btn btn-secondary me-2 btn-accent"
           %>
           <%= link_to "Play with Friends :>",
               new_user_session_path,
-              class: "btn btn-primary btn-accent",
-              data: { turbolinks: false, target: "_blank" }
+              class: "btn btn-secondary btn-accent"
           %>
         <% end %>
       </div>

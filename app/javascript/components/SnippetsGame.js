@@ -152,7 +152,6 @@ function SnippetsGame({
     return meta && meta.getAttribute('content');
   };
 
-
   // const handleMultiplayerSubmit = async (snippet_id, success) => {
   //   try {
   //     await handleSubmit(snippet_id, success);
@@ -171,9 +170,15 @@ function SnippetsGame({
         onNext={handleNextSnippet}
       />
     ) : (
-      <div className="row">
+      <div className="row gx-1 gy-4">
         {snippets.map(snippet => (
-          <div key={snippet.id} className="col-md-6 mb-4">
+          <div
+            key={snippet.id}
+            className="col-md-6"
+            style={{
+              minWidth: '400px'
+            }}
+          >
             <SnippetCard
               snippet={snippet}
               onClick={() => setSelectedSnippet(snippet)}

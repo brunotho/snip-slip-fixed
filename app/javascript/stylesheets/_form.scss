@@ -11,3 +11,38 @@
   box-shadow: 0 0 0 0.25rem rgba($color-brand-accent, 0.25) !important;
   outline: 0;
 }
+
+.form-check-input:checked {
+  background-color: $color-brand-accent;
+  border-color: $color-brand-accent;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba($color-brand-accent, 0.25) !important;
+}
+
+.form-container {
+  background-color: lighten($color-brand-primary, 10%);
+  // border: 1px solid lighten($color-brand-secondary, 40%);
+  box-shadow: 0 0 5px $color-brand-secondary;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  max-width: 400px;
+  // box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  a {
+    color: $color-brand-secondary;
+    text-decoration: none;
+    padding: .25rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  h2 {
+    padding: .5rem 0;
+    font-size: 1.5em;
+    text-align: center;
+  }
+}

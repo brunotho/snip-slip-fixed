@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :game_sessions, through: :game_session_participants
   has_many :rounds, dependent: :destroy
 
+  validate :language_presence_and_inclusion
+
   # Updated friendship associations
   has_many :friendships, dependent: :destroy
   has_many :friends, -> { where(friendships: { status: :accepted }) }, through: :friendships, source: :friend
@@ -38,13 +40,19 @@ class User < ApplicationRecord
     friendships.where(friend: friend, status: [:pending, :accepted]).exists?
   end
 
-  # validates :language, inclusion: { in: %w[English German] }
-
   def total_score
     if (session = game_sessions.last)
       session.rounds.where(user_id: id).map(&:score).compact.sum
     else
       0
+    end
+  end
+
+  private
+
+  def language_presence_and_inclusion
+    if language.blank? || !LyricSnippet.languages.include?(language)
+      errors.add(:language, "must be selected")
     end
   end
 end

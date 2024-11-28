@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   include ActiveStorage::SetCurrent
 
-  # before_action :set_active_storage_host
   before_action :configure_permitted_paramters, if: :devise_controller?
   before_action :store_user_location!, if: :storable_location?
 
@@ -18,23 +17,20 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # def set_active_storage_host
-  #   ActiveStorage::Current.url_options = {
-  #     host: ENV.fetch("HEROKU_APP_URL", "snip-slip-21fb4924292b.herokuapp.com"),
-  #     protocol: "https"
-  #   }
-  # end
-
   def store_user_location!
-    store_location_for(:user, request.fullpath)
+    Rails.logger.debug "🎯 Attempting to store location: #{request.fullpath}"
+    Rails.logger.debug "🎯 Storable?: #{storable_location?}"
+    store_location_for(:user, request.fullpath) if storable_location?
   end
 
   def storable_location?
-    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+    request.get? && !devise_controller? && !request.xhr?
   end
 
   def after_sign_in_path_for(resource)
-    stored_location_for(resource) || root_path
+    stored_path = stored_location_for(resource)
+    Rails.logger.debug "🎯 After sign in - Stored path: #{stored_path}"
+    stored_path || root_path
   end
 
 

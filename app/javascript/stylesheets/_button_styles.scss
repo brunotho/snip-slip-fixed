@@ -90,6 +90,11 @@
 //   @include button-variant($color-action-submit, $color-brand-primary)
 // }
 
+.btn-login {
+  @extend .btn-accent;
+  width: 100%;
+}
+
 .btn-icon {
   width: 32px;
   height: 32px;
