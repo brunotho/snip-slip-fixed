@@ -15,6 +15,7 @@ function MultiPlayerGame({
   setGameData,
   handleSubmit,
   game_session_id,
+  mainContent
 }) {
   // const initialized = useRef(false);
 
@@ -46,14 +47,14 @@ function MultiPlayerGame({
     };
   }, [game_session_id, gameData]);
 
-  const handleMultiplayerSubmit = async (snippet_id, success) => {
-    try {
-      await handleSubmit(snippet_id, success);
+  // const handleMultiplayerSubmit = async (snippet_id, success) => {
+  //   try {
+  //     await handleSubmit(snippet_id, success);
 
-    } catch (error) {
-      console.error("Error submitting round (MultiPlayer):", error)
-    }
-  };
+  //   } catch (error) {
+  //     console.error("Error submitting round (MultiPlayer):", error)
+  //   }
+  // };
 
   if (error) return <div>Error loading snippets: {error.message}</div>;
   if (loading) return <div>Loading snippets... </div>;
@@ -63,24 +64,26 @@ function MultiPlayerGame({
   return (
     <GameLayout
       mainContent={
-        selectedSnippet ? (
-          <ExpandedSnippet
-            snippet={selectedSnippet}
-            onSubmit={handleMultiplayerSubmit}
-            game_session_id={game_session_id}
-          />
-        ) : (
-          <div className="row">
-            {snippets.map(snippet => (
-              <div key={snippet.id} className="col-md-6 mb-4">
-                <SnippetCard
-                  snippet={snippet}
-                  onClick={() => setSelectedSnippet(snippet)}
-                />
-              </div>
-            ))}
-          </div>
-        )
+        // selectedSnippet ? (
+        //   <ExpandedSnippet
+        //     snippet={selectedSnippet}
+        //     // onSubmit={handleMultiplayerSubmit}
+        //     onSubmit={handleSubmit}
+        //     game_session_id={game_session_id}
+        //   />
+        // ) : (
+        //   <div className="row">
+        //     {snippets.map(snippet => (
+        //       <div key={snippet.id} className="col-md-6 mb-4">
+        //         <SnippetCard
+        //           snippet={snippet}
+        //           onClick={() => setSelectedSnippet(snippet)}
+        //         />
+        //       </div>
+        //     ))}
+        //   </div>
+        // )
+        mainContent
       }
       sideContent={
         <div className="multiplayer-progress">

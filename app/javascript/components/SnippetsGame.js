@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import QuickPlayGame from './QuickPlayGame';
 import SinglePlayerGame from './SinglePlayerGame';
 import MultiPlayerGame from './MultiPlayerGame';
+import SnippetCard from './SnippetCard';
+import ExpandedSnippet from './ExpandedSnippet';
 
 function SnippetsGame({
   game_session_id = null,
@@ -150,6 +152,37 @@ function SnippetsGame({
     return meta && meta.getAttribute('content');
   };
 
+
+  // const handleMultiplayerSubmit = async (snippet_id, success) => {
+  //   try {
+  //     await handleSubmit(snippet_id, success);
+
+  //   } catch (error) {
+  //     console.error("Error submitting round (MultiPlayer):", error)
+  //   }
+  // };
+
+  const mainContent =
+    selectedSnippet ? (
+      <ExpandedSnippet
+        snippet={selectedSnippet}
+        onSubmit={gameMode === 'quick' ? handleNextSnippet : handleSubmit}
+        game_session_id={game_session_id}
+        onNext={handleNextSnippet}
+      />
+    ) : (
+      <div className="row">
+        {snippets.map(snippet => (
+          <div key={snippet.id} className="col-md-6 mb-4">
+            <SnippetCard
+              snippet={snippet}
+              onClick={() => setSelectedSnippet(snippet)}
+            />
+          </div>
+        ))}
+      </div>
+    )
+
   const gameProps = {
     snippets,
     loading,
@@ -161,6 +194,7 @@ function SnippetsGame({
     handleSubmit: gameMode === 'quick' ? null : handleSubmit,
     handleNextSnippet: gameMode === 'quick' ? handleNextSnippet : null,
     game_session_id: gameMode === 'quick' ? null : game_session_id,
+    mainContent
   };
 
   const renderGameMode = () => {
@@ -180,7 +214,6 @@ function SnippetsGame({
   }
 
   console.log("SNIPPETSGAME before return gameData:", gameData);
-
 
   return renderGameMode();
 }
