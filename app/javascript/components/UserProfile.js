@@ -54,9 +54,9 @@ export default function UserProfile({ initialUser = {}, languages = [] }) {
   };
 
   return (
-    <ConstrainedLayout>
+    <div class="container form-container">
       {isEditing ? (
-        <form onSubmit={handleSubmit} className="border p-4 rounded">
+        <form onSubmit={handleSubmit} className=" rounded">
           <h3 className="mb-3">Edit Profile</h3>
 
           <div className="mb-3">
@@ -139,6 +139,6 @@ export default function UserProfile({ initialUser = {}, languages = [] }) {
           <button className="btn btn-primary btn-accent" onClick={() => setIsEditing(true)}>Edit Profile</button>
         </div>
       )}
-    </ConstrainedLayout>
+    </div>
   );
 }

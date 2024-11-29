@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :game_sessions, through: :game_session_participants
   has_many :rounds, dependent: :destroy
 
+  validate :name_presence_and_length
   validate :language_presence_and_inclusion
 
   # Updated friendship associations
@@ -49,6 +50,12 @@ class User < ApplicationRecord
   end
 
   private
+
+  def name_presence_and_length
+    if name.blank? || name.length < 2
+      errors.add(:name, "must be at least 2 characters long")
+    end
+  end
 
   def language_presence_and_inclusion
     if language.blank? || !LyricSnippet.languages.include?(language)

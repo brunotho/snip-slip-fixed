@@ -18,8 +18,8 @@ function ExpandedSnippet({ snippet, game_session_id, onSubmit, onNext }) {
 
   return (
     <div
-      className="card mb-4 w-100"
-      style={{ height: '65vh', overflow: 'hidden' }}
+      className="card w-100"
+      style={{ height: '65vh', maxWidth: '95%', overflow: 'hidden' }}
     >
       <div className="row no-gutters h-100">
         <div className="col d-flex flex-column h-100">
@@ -57,9 +57,9 @@ function ExpandedSnippet({ snippet, game_session_id, onSubmit, onNext }) {
               alt={`${snippet.song} Album Cover`}
               style={{
                 maxHeight: '50vh',
-                width: '100%',
-                height: 'auto',
-                objectFit: 'contain',
+                maxWidth: '100%',
+                // height: 'auto',
+                // objectFit: 'contain',
               }}
             />
           </div>
