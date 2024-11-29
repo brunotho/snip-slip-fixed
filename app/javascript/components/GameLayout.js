@@ -16,17 +16,17 @@ const GameLayout = ({
         <div
           className={`col-md-8 mx-auto`}
           style={{
-            maxWidth: '65vw',
+            // maxWidth: '65vw',
             // paddingLeft: '2rem',
             // paddingRight: '2rem',
           }}        >
           <div
             className={`d-flex justify-content-center ${!gameOver ? 'align-items-center' : ''}`}
             style={{
-              height: '80vh',
+              // height: '80vh',
               overflow: 'hidden',
               marginTop: '0',
-              paddingTop: '0'
+              paddingTop: '1rem'
             }}
           >
             {mainContent}
@@ -36,11 +36,12 @@ const GameLayout = ({
           <div
             className="col-md-2"
             style={{
-              height: '80vh',
+              // height: '80vh',
               overflowY: 'auto',
               overflowX: 'hidden',
               paddingLeft: '0',
-              // marginTop: '100px'
+              paddingRight: '1rem',
+              marginTop: '1rem'
             }}
           >
             {sideContent}

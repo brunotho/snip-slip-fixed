@@ -7,7 +7,13 @@
 @import './card_styles';
 @import './form';
 @import './containers';
+@import './rules';
 
 body {
   background-color: $color-brand-primary;
+}
+
+.page-without-header {
+  margin-top: 59.58px;
+  // padding-top: .25rem;
 }
