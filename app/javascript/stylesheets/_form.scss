@@ -21,6 +21,24 @@
   box-shadow: 0 0 0 0.25rem rgba($color-brand-accent, 0.25) !important;
 }
 
+// color for include_blank of dropdown
+.form-select.select.required {
+  color: #555 !important;
+}
+
+.form-select option[value] {
+  color: black !important;
+}
+
+.form-select option[value=""] {
+  display: none;
+}
+//
+
+.form-control {
+  margin-bottom: 1rem;
+}
+
 .form-container {
   background-color: lighten($color-brand-primary, 10%);
   // border: 1px solid lighten($color-brand-secondary, 40%);

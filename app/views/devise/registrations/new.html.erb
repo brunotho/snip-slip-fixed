@@ -18,11 +18,11 @@
       <%= f.input :language,
                   collection: LyricSnippet.languages,
                   # selected: "English",
-                  include_blank: "Select your Language",
+                  include_blank: "Language",
                   required: true,
                   label: false,
                   autofocus: true,
-                  input_html: { autocomplete: "language", placeholder: "Language" } %>
+                  input_html: { autocomplete: "language" } %>
       <%= f.input :password,
                   required: true,
                   label: false,
@@ -39,7 +39,7 @@
     </div>
   <% end %>
 
-  <div class="text-left mt-3">
+  <div class="link-container d-flex justify-content-center mt-3">
     <%= render "devise/shared/links" %>
   </div>
 </div>

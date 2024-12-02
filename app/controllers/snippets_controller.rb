@@ -28,12 +28,15 @@ class SnippetsController < ApplicationController
 
   def fetch_snippets
     user_language = current_user&.language || "English"
-    snippets = LyricSnippet
-                .where(language: user_language)
+    random_ids = LyricSnippet
                 .where.not(snippet: "Dummy snippet for failed rounds")
+                .where(language: user_language)
                 # .where(artist: "Arctic Monkeys")
-                .order("RANDOM()")
-                .limit(4)
+                .pluck(:id)
+                .sample(20)
+    snippets = LyricSnippet
+                .where(id: random_ids)
+                .sample(4)
 
     render json: snippets.map { |snippet|
       snippet.as_json.merge({

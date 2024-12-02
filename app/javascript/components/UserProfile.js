@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import ConstrainedLayout from './ConstrainedLayout';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
 
-export default function UserProfile({ initialUser = {}, languages = [] }) {
+const UserProfile = ({ initialUser = {}, languages = [] }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isPasswordSectionOpen, setIsPasswordSectionOpen] = useState(false);
   const [user, setUser] = useState(initialUser);
   const [errors, setErrors] = useState({});
   const [changingSensitiveInfo, setChangingSensitiveInfo] = useState(false);
 
-  const handleSensitiveInfoChange = (e) => {
+  const handlePasswordChange = (e) => {
     const { name, value } = e.target;
-    if (name === "password" || name === "password_confirmation") {
-      setChangingSensitiveInfo(!!value);
+    if ((name === "password" || name === "password_confirmation") && value){
+      setChangingSensitiveInfo(true);
+    } else if (!value) {
+      setChangingSensitiveInfo(false);
     }
   };
 
@@ -44,6 +50,7 @@ export default function UserProfile({ initialUser = {}, languages = [] }) {
         setIsEditing(false);
         setErrors({});
         setChangingSensitiveInfo(false);
+        setIsPasswordSectionOpen(false);
       } else {
         const errorData = await response.json();
         setErrors(errorData.errors);
@@ -53,92 +60,142 @@ export default function UserProfile({ initialUser = {}, languages = [] }) {
     }
   };
 
-  return (
-    <div class="container form-container">
-      {isEditing ? (
-        <form onSubmit={handleSubmit} className=" rounded">
-          <h3 className="mb-3">Edit Profile</h3>
+  const handleSensitiveInfoChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "password" || name === "password_confirmation") {
+      setChangingSensitiveInfo(!!value);
+    }
+  };
 
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              defaultValue={user.name}
-              className="form-control"
-            />
-            {errors.name && <div className="text-danger">{errors.name.join(", ")}</div>}
+  if (!isEditing) {
+    return (
+      <div className="container form-container">
+        <h2 className="">{user.name}</h2>
+        <p>Snippet Settings:</p>
+        <p>Language: {user.language}</p>
+        <button
+          className="btn btn-accent"
+          onClick={() => setIsEditing(true)}
+        >
+          Edit Profile
+        </button>
+      </div>
+    );
+  }
+
+return (
+  <div className="container form-container">
+    <h2>Edit your profile</h2>
+    <form onSubmit={handleSubmit}>
+      <div className="form-inputs">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          defaultValue={user.name}
+          className="form-control"
+          placeholder="Name"
+          autocomplete="name"
+        />
+        {errors.name && (
+          <div className="invalid-feedback d-block">
+            {errors.name.join(", ")}
           </div>
+        )}
 
-          <div className="mb-3">
-            <label htmlFor="language" className="form-label">Language</label>
-            <select
-              id="language"
-              name="language"
-              defaultValue={user.language}
-              className="form-select"
-            >
-              {languages.map((language) => (
-                <option key={language} value={language}>
-                  {language}
-                </option>
-              ))}
-            </select>
-            {errors.language && <div className="text-danger">{errors.language.join(", ")}</div>}
+        <select
+          id="language"
+          name="language"
+          defaultValue={user.language}
+          className="form-control"
+          autocomplete="language"
+        >
+          {languages.map((language) => (
+            <option key={language} value={language}>
+              {language}
+            </option>
+          ))}
+        </select>
+        {errors.language && (
+          <div className="invalid-feedback d-block">
+            {errors.language.join(", ")}
           </div>
+        )}
 
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">New Password (optional)</label>
+        <div className="d-flex align-items-center mb-2">
+          <p className="mb-0">Change Password</p>
+          <button
+            type="button"
+            className="btn-plusminus ms-2"
+            onClick={() => setIsPasswordSectionOpen(!isPasswordSectionOpen)}
+          >
+            <FontAwesomeIcon icon={isPasswordSectionOpen ? faMinus : faPlus} />
+          </button>
+        </div>
+
+        {isPasswordSectionOpen && (
+          <>
             <input
               type="password"
               id="password"
               name="password"
               className="form-control"
-              onChange={handleSensitiveInfoChange}
+              placeholder="New Password"
+              onChange={handlePasswordChange}
+              autocomplete="new-password"
             />
-            {errors.password && <div className="text-danger">{errors.password.join(", ")}</div>}
-          </div>
+            {errors.password && (
+              <div className="invalid-feedback d-block">
+                {errors.password.join(", ")}
+              </div>
+            )}
 
-          <div className="mb-3">
-            <label htmlFor="password_confirmation" className="form-label">Confirm New Password</label>
             <input
               type="password"
               id="password_confirmation"
               name="password_confirmation"
               className="form-control"
-              onChange={handleSensitiveInfoChange}
+              placeholder="Confirm New Password"
+              onChange={handlePasswordChange}
+              autocomplete="new-password"
             />
-          </div>
 
-          {changingSensitiveInfo && (
-            <div className="mb-3">
-              <label htmlFor="current_password" className="form-label">Current Password</label>
+            {changingSensitiveInfo && (
               <input
                 type="password"
                 id="current_password"
                 name="current_password"
                 className="form-control"
+                placeholder="Current Password"
                 required
+                autocomplete="current-password"
               />
-              {errors.current_password && (
-                <div className="text-danger">{errors.current_password.join(", ")}</div>
-              )}
-            </div>
-          )}
+            )}
+          </>
+        )}
 
-          <div className="d-flex justify-content-between">
-            <button type="submit" className="btn btn-primary btn-accent">Save</button>
-            <button type="button" className="btn btn-secondary btn-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
-          </div>
-        </form>
-      ) : (
-        <div className="border p-4 rounded">
-          <h3 className="mb-3">{user.name}</h3>
-          <p><strong>Language:</strong> {user.language}</p>
-          <button className="btn btn-primary btn-accent" onClick={() => setIsEditing(true)}>Edit Profile</button>
+        <div className="form-actions d-flex justify-content-between mt-4">
+          <button type="submit" className="btn btn-accent">
+            Save
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-cancel"
+            onClick={() => {
+              setIsEditing(false);
+              setIsPasswordSectionOpen(false);
+              setChangingSensitiveInfo(false);
+            }}
+          >
+            Cancel
+          </button>
         </div>
-      )}
-    </div>
-  );
-}
+      </div>
+    </form>
+  </div>
+);
+
+
+};
+
+export default UserProfile;

@@ -123,6 +123,19 @@
   }
 }
 
+.btn-plusminus {
+  @extend .btn-icon;
+
+  &:hover {
+    .fa-plus {
+      color: $color-brand-secondary !important;
+    }
+    .fa-minus {
+      color: $color-brand-secondary !important;
+    }
+  }
+}
+
 
 
 .button-fancy {
