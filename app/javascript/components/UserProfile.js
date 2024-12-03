@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ConstrainedLayout from './ConstrainedLayout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -60,142 +59,135 @@ const UserProfile = ({ initialUser = {}, languages = [] }) => {
     }
   };
 
-  const handleSensitiveInfoChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "password" || name === "password_confirmation") {
-      setChangingSensitiveInfo(!!value);
-    }
-  };
-
   if (!isEditing) {
     return (
       <div className="container form-container">
         <h2 className="">{user.name}</h2>
         <p>Snippet Settings:</p>
         <p>Language: {user.language}</p>
-        <button
-          className="btn btn-accent"
-          onClick={() => setIsEditing(true)}
-        >
-          Edit Profile
-        </button>
+        <div className="d-flex justify-content-end">
+          <button
+            className="btn btn-accent"
+            onClick={() => setIsEditing(true)}
+            >
+            Edit Profile
+          </button>
+        </div>
       </div>
     );
   }
 
-return (
-  <div className="container form-container">
-    <h2>Edit your profile</h2>
-    <form onSubmit={handleSubmit}>
-      <div className="form-inputs">
-        <input
-          type="text"
-          id="name"
-          name="name"
-          defaultValue={user.name}
-          className="form-control"
-          placeholder="Name"
-          autocomplete="name"
-        />
-        {errors.name && (
-          <div className="invalid-feedback d-block">
-            {errors.name.join(", ")}
-          </div>
-        )}
+  return (
+    <div className="container form-container">
+      <h2>Edit your profile</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-inputs">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            defaultValue={user.name}
+            className="form-control"
+            placeholder="Name"
+            autocomplete="name"
+          />
+          {errors.name && (
+            <div className="invalid-feedback d-block">
+              {errors.name.join(", ")}
+            </div>
+          )}
 
-        <select
-          id="language"
-          name="language"
-          defaultValue={user.language}
-          className="form-control"
-          autocomplete="language"
-        >
-          {languages.map((language) => (
-            <option key={language} value={language}>
-              {language}
-            </option>
-          ))}
-        </select>
-        {errors.language && (
-          <div className="invalid-feedback d-block">
-            {errors.language.join(", ")}
-          </div>
-        )}
-
-        <div className="d-flex align-items-center mb-2">
-          <p className="mb-0">Change Password</p>
-          <button
-            type="button"
-            className="btn-plusminus ms-2"
-            onClick={() => setIsPasswordSectionOpen(!isPasswordSectionOpen)}
+          <select
+            id="language"
+            name="language"
+            defaultValue={user.language}
+            className="form-control"
+            autocomplete="language"
           >
-            <FontAwesomeIcon icon={isPasswordSectionOpen ? faMinus : faPlus} />
-          </button>
-        </div>
+            {languages.map((language) => (
+              <option key={language} value={language}>
+                {language}
+              </option>
+            ))}
+          </select>
+          {errors.language && (
+            <div className="invalid-feedback d-block">
+              {errors.language.join(", ")}
+            </div>
+          )}
 
-        {isPasswordSectionOpen && (
-          <>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="form-control"
-              placeholder="New Password"
-              onChange={handlePasswordChange}
-              autocomplete="new-password"
-            />
-            {errors.password && (
-              <div className="invalid-feedback d-block">
-                {errors.password.join(", ")}
-              </div>
-            )}
+          <div className="d-flex align-items-center mb-2">
+            <p className="mb-0">Change Password</p>
+            <button
+              type="button"
+              className="btn-plusminus ms-2"
+              onClick={() => setIsPasswordSectionOpen(!isPasswordSectionOpen)}
+            >
+              <FontAwesomeIcon icon={isPasswordSectionOpen ? faMinus : faPlus} />
+            </button>
+          </div>
 
-            <input
-              type="password"
-              id="password_confirmation"
-              name="password_confirmation"
-              className="form-control"
-              placeholder="Confirm New Password"
-              onChange={handlePasswordChange}
-              autocomplete="new-password"
-            />
-
-            {changingSensitiveInfo && (
+          {isPasswordSectionOpen && (
+            <>
               <input
                 type="password"
-                id="current_password"
-                name="current_password"
+                id="password"
+                name="password"
                 className="form-control"
-                placeholder="Current Password"
-                required
-                autocomplete="current-password"
+                placeholder="New Password"
+                onChange={handlePasswordChange}
+                autocomplete="new-password"
               />
-            )}
-          </>
-        )}
+              {errors.password && (
+                <div className="invalid-feedback d-block">
+                  {errors.password.join(", ")}
+                </div>
+              )}
 
-        <div className="form-actions d-flex justify-content-between mt-4">
-          <button type="submit" className="btn btn-accent">
-            Save
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary btn-cancel"
-            onClick={() => {
-              setIsEditing(false);
-              setIsPasswordSectionOpen(false);
-              setChangingSensitiveInfo(false);
-            }}
-          >
-            Cancel
-          </button>
+              <input
+                type="password"
+                id="password_confirmation"
+                name="password_confirmation"
+                className="form-control"
+                placeholder="Confirm New Password"
+                onChange={handlePasswordChange}
+                autocomplete="new-password"
+              />
+
+              {changingSensitiveInfo && (
+                <input
+                  type="password"
+                  id="current_password"
+                  name="current_password"
+                  className="form-control"
+                  placeholder="Current Password"
+                  required
+                  autocomplete="current-password"
+                />
+              )}
+            </>
+          )}
+
+          <div className="form-actions d-flex justify-content-between mt-4">
+            <button
+              type="button"
+              className="btn btn-secondary btn-cancel"
+              onClick={() => {
+                setIsEditing(false);
+                setIsPasswordSectionOpen(false);
+                setChangingSensitiveInfo(false);
+              }}
+            >
+              Cancel
+            </button>
+            <button type="submit" className="btn btn-accent">
+              Save
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
-);
-
-
+      </form>
+    </div>
+  );
 };
 
 export default UserProfile;

@@ -205,11 +205,11 @@ const FriendshipManager = () => {
                     className="d-flex justify-content-between align-items-center p-2 mb-2 rounded">
                   <span className="fw-medium">{request.name}</span>
                   <div className="button-container">
-                    <button className="btn-icon" onClick={() => acceptFriendRequest(request.id)}>
-                      <FontAwesomeIcon icon={faCheck} />
-                    </button>
                     <button className="btn-icon" onClick={() => declineFriendRequest(request.id)}>
                       <FontAwesomeIcon icon={faXmark} />
+                    </button>
+                    <button className="btn-icon" onClick={() => acceptFriendRequest(request.id)}>
+                      <FontAwesomeIcon icon={faCheck} />
                     </button>
                   </div>
                 </div>
