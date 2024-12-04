@@ -6,8 +6,12 @@
   background-color: $bg-color;
   border-color: $bg-color;
 
-  $hover-bg: darken($bg-color, 10%);
-  $active-bg: darken($bg-color, 15%);
+  // for muted-teal:
+  // $hover-bg: darken($bg-color, 10%);
+  // $active-bg: darken($bg-color, 15%);
+  // for dark purple:
+  $hover-bg: lighten($bg-color, 10%);
+  $active-bg: lighten($bg-color, 15%);
 
   &:hover {
     color: $text-color;
@@ -48,6 +52,7 @@
 .btn-accent {
   @include button-variant($color-brand-accent, $color-brand-primary);
 
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1);
   &:disabled,
   &.disabled {
     opacity: 0.5;

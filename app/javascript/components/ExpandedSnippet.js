@@ -1,5 +1,5 @@
 import React from 'react';
-import '../stylesheets/_button_styles.scss';
+// import '../stylesheets/_button_styles.scss';
 
 function ExpandedSnippet({ snippet, game_session_id, onSubmit, onNext }) {
   const handleSuccess = () => {
@@ -17,18 +17,25 @@ function ExpandedSnippet({ snippet, game_session_id, onSubmit, onNext }) {
   };
 
   return (
-    <div
-      className="card w-100"
-      style={{ height: '65vh', maxWidth: '95%', overflow: 'hidden' }}
-    >
-      <div className="row no-gutters h-100">
-        <div className="col d-flex flex-column h-100">
-          <div className="card-body flex-grow-1 overflow-auto">
-            <p className="card-text" style={{ fontSize: '1.5rem' }}>
-              {snippet.snippet}
-            </p>
+    <div className="expanded-snippet">
+
+        <div className="lyric-box">
+          <p>
+            {snippet.snippet}
+          </p>
+        </div>
+
+        <div className="image-box">
+          <div className="square-image-container">
+            <img
+              src={snippet.image_url}
+              alt={`${snippet.song} Album Cover`}
+              className="album-cover"
+            />
           </div>
-          <div className="button-container p-2" style={{ flexShrink: 0 }}>
+        </div>
+
+        <div className="button-box">
             {game_session_id ? (
               <>
                 <button className="button-fancy button-fancy-success" onClick={handleSuccess}>
@@ -43,34 +50,31 @@ function ExpandedSnippet({ snippet, game_session_id, onSubmit, onNext }) {
                 Next
               </button>
             )}
-          </div>
         </div>
 
-        {/* Right side */}
-        <div
-          className="col-auto d-flex flex-column h-100"
-          style={{ overflow: 'hidden' }}
-        >
-          <div style={{ flexShrink: 0 }}>
-            <img
-              src={snippet.image_url}
-              alt={`${snippet.song} Album Cover`}
-              style={{
-                maxHeight: '50vh',
-                maxWidth: '100%',
-                // height: 'auto',
-                // objectFit: 'contain',
-              }}
-            />
-          </div>
-          <div className="flex-grow-1"></div>
-          <div className="text-right p-2" style={{ flexShrink: 0 }}>
+        <div className="info-box">
             <p className="mb-1">{snippet.song}</p>
             <p className="mb-1">{snippet.artist}</p>
             <p className="mb-1">Points: {snippet.difficulty}</p>
+        </div>
+
+
+      {/* <div className="row h-100">
+
+        <div className="col d-flex flex-column">
+          <div className="card-body lyric-box overflow-auto">
+          </div>
+          <div className="mt-auto">
           </div>
         </div>
-      </div>
+
+        <div
+          className="col-auto d-flex flex-column h-100" style={{ width: "min-content" }}>
+          <div className="text-right p-2 mt-auto" style={{ fontSize: ".9rem" }}>
+          </div>
+        </div>
+      </div> */}
+
     </div>
   );
 }

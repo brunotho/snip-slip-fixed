@@ -39,7 +39,7 @@ const GameLayout = ({
               // height: '80vh',
               overflowY: 'auto',
               overflowX: 'hidden',
-              paddingLeft: '0',
+              paddingLeft: '1rem',
               paddingRight: '1rem',
               marginTop: '1rem'
             }}

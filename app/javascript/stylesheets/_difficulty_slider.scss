@@ -3,9 +3,9 @@
 
   $track-height: 0.5rem;
   $thumb-size: 1.25rem;
-  $track-color-start: rgba($color-brand-accent, 0.4);
-  $track-color-end: rgba(darken($color-brand-accent, 20%), 0.4);
-  $thumb-color: $color-brand-primary;
+  $track-color-start: rgba($color-brand-accent, 0.7);
+  $track-color-end: rgba(darken($color-brand-accent, 10%), 1);
+  $thumb-color: white;
   $thumb-border: $color-brand-accent;
 
   .slider {
