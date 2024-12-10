@@ -171,7 +171,7 @@ const UserProfile = ({ initialUser = {}, languages = [] }) => {
           <div className="form-actions d-flex justify-content-between mt-4">
             <button
               type="button"
-              className="btn btn-secondary btn-cancel"
+              className="btn btn-cancel"
               onClick={() => {
                 setIsEditing(false);
                 setIsPasswordSectionOpen(false);

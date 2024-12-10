@@ -7,7 +7,9 @@
       <%= f.input :song, label: false, input_html: { placeholder: "Song" } %>
       <%= f.input :language, collection: LyricSnippet.languages, selected: "English", label: false, input_html: { placeholder: "Language" } %>
       <div id="difficulty-slider-container"></div>
-      <%= f.button :submit, 'Submit', class: 'btn btn-secondary btn-accent mt-4' %>
+      <div class="d-flex justify-content-end">
+        <%= f.button :submit, 'Submit', class: "btn btn-accent mt-4" %>
+      </div>
     <% end %>
   </div>
 </div>

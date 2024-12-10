@@ -7,22 +7,22 @@
         <% if user_signed_in? %>
           <%= button_to "Play Alone :<",
               start_single_player_game_sessions_path,
-              class: "btn btn-secondary me-2 btn-accent",
+              class: "btn me-2 btn-accent",
               method: :post
           %>
-          <%= button_to "Play with Friends :> :>",
+          <%= button_to "Play with Friends :>",
               start_multiplayer_game_sessions_path,
-              class: "btn btn-secondary btn-accent",
+              class: "btn btn-accent",
               method: :post
           %>
         <% else %>
           <%= link_to "Play Alone :<",
               new_user_session_path,
-              class: "btn btn-secondary me-2 btn-accent"
+              class: "btn me-2 btn-accent"
           %>
           <%= link_to "Play with Friends :>",
               new_user_session_path,
-              class: "btn btn-secondary btn-accent"
+              class: "btn btn-accent"
           %>
         <% end %>
       </div>
