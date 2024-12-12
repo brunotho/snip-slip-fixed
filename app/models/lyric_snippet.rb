@@ -43,6 +43,7 @@ class LyricSnippet < ApplicationRecord
   end
 
   def normalize_artist_name(name)
+    # add äö!`^ etc
     name.downcase.gsub(/[^a-z0-9\s]/i, "").strip
   end
 
@@ -72,13 +73,14 @@ class LyricSnippet < ApplicationRecord
     )
 
     p "🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰 START #{artist_name} -- #{song_name}"
-    p "Full URL with query: #{response.request.last_uri}"
-    p "Base URI: #{response.request.uri}"
-    p "Path: #{response.request.path}"
+    # p "Full URL with query: #{response.request.last_uri}"
+    # p "Base URI: #{response.request.uri}"
+    # p "Path: #{response.request.path}"
     p "Query string: #{response.request.uri.query}"
     p "HTT🥳 encoded params: #{URI.decode_www_form(response.request.uri.query).to_h}"
     p "😶 full response START:"
-    p response
+    # p response
+    puts JSON.pretty_generate(response.parsed_response)
     p "😶 full response END"
     # response["albums"]["items"][0]["images"][0]["url"]
     response

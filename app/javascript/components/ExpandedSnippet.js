@@ -47,7 +47,7 @@ function ExpandedSnippet({ snippet, game_session_id, onSubmit, onNext }) {
               </>
             ) : (
               <button className="button-fancy" onClick={handleNext}>
-                Next
+                Next 🤓
               </button>
             )}
         </div>
