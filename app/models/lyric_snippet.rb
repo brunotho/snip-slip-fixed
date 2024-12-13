@@ -1,11 +1,17 @@
 class LyricSnippet < ApplicationRecord
-  has_many :rounds, dependent: :destroy
   has_one_attached :image
+  has_many :rounds, dependent: :destroy
+  has_many :user_played_snippets
+  has_many :users_who_played, through: :user_played_snippets, source: :user
 
   validates :snippet, presence: true
+  validates :snippet, length: { minimum: 5, maximum: 70}
   validates :artist, presence: true
+  validates :artist, length: { minimum: 2, maxium: 20}
   validates :song, presence: true
-  validates :difficulty, presence: true, inclusion: { in: 0..1000 }
+  validates :song, length: { minimum: 2, maxium: 30}
+  validates :difficulty, presence: true
+  validates :difficulty, inclusion: { in: 0..1000 }
   validates :language, inclusion: { in: %w[English German] }
 
   def self.languages

@@ -12,10 +12,11 @@
           1,
           1,
           1,
-          null,
           1,
           1,
           null,
+          1,
+          1,
           null,
           1,
           1,
@@ -89,6 +90,12 @@
           null
         ]
       },
+      "/home/bruno/code/brunothormaehlen/rails/snip_slip/app/helpers/user_played_snippets_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
       "/home/bruno/code/brunothormaehlen/rails/snip_slip/app/helpers/welcome_helper.rb": {
         "lines": [
           1,
@@ -100,62 +107,54 @@
           1,
           1,
           1,
+          1,
+          1,
           null,
+          1,
           1,
           1,
           1,
           1,
           1,
-          null,
           1,
-          0,
-          null,
-          null,
           1,
-          null,
           1,
           null,
           1,
           0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           1,
           null,
-          0,
-          null,
+          1,
           null,
           1,
           0,
           0,
           null,
           0,
+          null,
+          null,
+          0,
+          0,
           0,
           null,
           0,
+          0,
+          0,
           null,
           null,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
           null,
           0,
           null,
@@ -165,6 +164,20 @@
           0,
           null,
           0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
           null,
           null,
           null,
@@ -184,6 +197,14 @@
           null,
           0,
           null,
+          null
+        ]
+      },
+      "/home/bruno/code/brunothormaehlen/rails/snip_slip/app/models/user_played_snippet.rb": {
+        "lines": [
+          1,
+          1,
+          1,
           null
         ]
       },
@@ -781,6 +802,23 @@
         "branches": {
         }
       },
+      "/home/bruno/code/brunothormaehlen/rails/snip_slip/app/controllers/user_played_snippets_controller.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/home/bruno/code/brunothormaehlen/rails/snip_slip/app/controllers/users_controller.rb": {
         "lines": [
           0,
@@ -1010,6 +1048,6 @@
         }
       }
     },
-    "timestamp": 1733933478
+    "timestamp": 1734104594
   }
 }

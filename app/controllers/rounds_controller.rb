@@ -60,7 +60,7 @@ class RoundsController < ApplicationController
 
       render json: response_data, status: 201
     else
-      render json: { errors: @round.errors.full_messages }, status: 4222
+      render json: { errors: @round.errors.full_messages }, status: 422
     end
   end
 

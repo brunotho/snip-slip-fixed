@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_04_145147) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_12_112524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,6 +91,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_145147) do
     t.index ["user_id"], name: "index_rounds_on_user_id"
   end
 
+  create_table "user_played_snippets", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "lyric_snippet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lyric_snippet_id"], name: "index_user_played_snippets_on_lyric_snippet_id"
+    t.index ["user_id"], name: "index_user_played_snippets_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -114,4 +123,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_145147) do
   add_foreign_key "rounds", "game_sessions"
   add_foreign_key "rounds", "lyric_snippets"
   add_foreign_key "rounds", "users"
+  add_foreign_key "user_played_snippets", "lyric_snippets"
+  add_foreign_key "user_played_snippets", "users"
 end

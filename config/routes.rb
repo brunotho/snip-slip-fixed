@@ -43,4 +43,6 @@ Rails.application.routes.draw do
   resources :friendships, only: [:index, :create, :update, :destroy]
 
   get "test", to: "snippets#test"
+
+  post "record_play", to: "user_played_snippets#record_play"
 end

@@ -1,0 +1,2 @@
+module UserPlayedSnippetsHelper
+end
