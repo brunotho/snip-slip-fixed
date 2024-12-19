@@ -67,6 +67,6 @@ gem 'simple_form'
 gem 'react-rails'
 gem 'cloudinary'
 gem 'httparty'
-# gem "sidekiq"
+gem "sidekiq"
 
 ruby '3.2.2'
